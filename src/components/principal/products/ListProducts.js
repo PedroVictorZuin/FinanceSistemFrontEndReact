@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {Table , Button} from "react-bootstrap"
 import Product from "../../../Controller/ProductController"
 import Swal from 'sweetalert2'
-import "./listProducts.css"
+import "./Products.css"
 //Bootstrap and jQuery libraries
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js';
@@ -34,8 +34,39 @@ export default class ListProduct extends Component{
 
     componentDidMount(){
 
-        this.product.ListProductAll()
-        .then(data => this.setState({products:data}))
+        let timerInterval
+        Swal.fire({
+        title: 'Carregando Conteudo',
+        html: 'Listando Produtos, Aguarde...',
+        timer: 12000,
+        timerProgressBar: true,
+        showConfirmButton : false,
+        willOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+            const content = Swal.getContent()
+            if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                b.textContent = Swal.getTimerLeft()
+                }
+            }
+            }, 100)
+            this.product.ListProductAll()
+            .then(data => {
+                this.setState({products:data})
+                Swal.close();
+            })
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+        }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            
+        }
+        })
     }
 
     async painelDeControle(element , operacao){
@@ -93,10 +124,10 @@ export default class ListProduct extends Component{
                                     '</div>'+
                                     '<hr>'+
                                 "</div>"+
-                                "<div class='col-md-12>"+
+                                "<div class='col-md-12' style='background-color : 'lightgray''>"+
                                         "<div class='col-md-4'>"+
                                             '<label><strong>Quantidade a se Adicionar</strong></label>' +
-                                            '<input type="number" min='+index.quantity+' value='+index.quantity+' id="quantidadeASeAdd" class="swal2-input">'+
+                                            '<input type="number" id="quantidadeASeAdd" class="swal2-input">'+
                                         "</div>"+
                                 "</div>"+
                             "</div>",
@@ -117,10 +148,11 @@ export default class ListProduct extends Component{
                               else{
                                   var quantidadeProdutos = parseInt(document.getElementById("quantidadeASeAdd").value)
                                   var idProduct = parseInt(document.getElementById("idProduct").value)
+                                  var quantidadeDeItensEmEstoque = parseInt(document.getElementById("quantidadeProduto").value)
 
-                                this.product.EnterProductQuantity(idProduct, quantidadeProdutos)
+                                this.product.EnterProductQuantity(idProduct, quantidadeProdutos , quantidadeDeItensEmEstoque)
                                 .then(res => {
-
+                                    console.log(res)
                                     if(res.success){
                                         Swal.fire({
                                             position: 'top-center',
@@ -133,7 +165,8 @@ export default class ListProduct extends Component{
                                         produtosState.map(index => {
                                             if(index.idproduct === idProduct)
                                             {
-                                                produtosState[cont].quantity = quantidadeProdutos
+                                                let quantidadeTotal = Number(quantidadeProdutos + quantidadeDeItensEmEstoque)
+                                                produtosState[cont].quantity = quantidadeTotal
                                                 this.setState({products : produtosState})
                                             }
                                             cont++

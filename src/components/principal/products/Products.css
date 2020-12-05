@@ -8,6 +8,22 @@
 }
 
 
+.alignCenter{
+    text-align: center;
+}
+
+.container-fluid{
+    background: #E0FFFF;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.caixadeBotoes{
+    background-color: #E0FFFF ;
+    padding: 25px;
+    justify-content: space-between;
+    display: flex; 
+}
 
 
 h4 {

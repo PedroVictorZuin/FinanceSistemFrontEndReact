@@ -15,7 +15,6 @@ export default function Home(){
                     <Link to="/listarFornecedores" ><Button id="botaoFornecedores" ></Button></Link>
                     <Link to="/listarRelatorios" ><Button id="botaoRelatorios" ></Button></Link>
                 </div>
-
             </p>
             <p>
                 Sistema de Gestão Integrado 

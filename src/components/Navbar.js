@@ -11,10 +11,10 @@ export default ()=>{
             <Navbar.Brand><Link to="/" className="whiteTextMrsGringa">Mrs.Gringa</Link></Navbar.Brand>
             <Nav className="mr-4">
                 <NavDropdown title=" Produtos"className="linkToButton" id="collasible-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1" className="linkToButton black">Cadastrar Produtos</NavDropdown.Item>
+                    <NavDropdown.Item ><Link className="linkToButton black" to="/cadastrarProduto">Cadastrar Produtos</Link></NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.2" className="linkToButton black">Entrada em Produtos</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4" className="linkToButton black">Listar Produtos</NavDropdown.Item>
+                    <NavDropdown.Item ><Link className="linkToButton black" to="/listarProdutos">Listar Produtos</Link></NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Notas" id="collasible-nav-dropdown" className="linkToButton">
                     <NavDropdown.Item href="#action/3.1" className="linkToButton black">Cadastrar Notas</NavDropdown.Item>
