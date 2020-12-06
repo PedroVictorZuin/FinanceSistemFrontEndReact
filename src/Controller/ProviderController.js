@@ -11,6 +11,25 @@ export default class Provider {
     }
 
 
+    RegisterNewProvider(provider){
+        let newProvider = {
+            "provider" : provider
+        }
+
+        return fetch('http://localhost:8081/admin/cadastroFornecedor/addProvider' , {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            cors : true,
+            body : JSON.stringify(newProvider)
+        })
+        .then(res => res.json())
+        .catch(err => err)
+
+    }
+
+
 
 
 

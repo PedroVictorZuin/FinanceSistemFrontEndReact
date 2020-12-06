@@ -7,9 +7,66 @@
     margin-top: 2%;
 }
 
+.containerParametros
+{
+    padding: 15px;
+    background-color: lightgray;
+    border: 1px solid darkslategray;
+    border-radius: 5px;
+}
+
+
+.painelAddQuantity
+{
+    padding: 15px;
+    background-color: lightgray;
+    border: 1px solid darkslategray;
+    border-radius: 5px;
+}
+
+.colunasSelectEntradaViaNota
+{
+    width: 150px;
+}
+
+.painelAddQuantity Button {
+    margin-top: 5%;
+}
+
+.PainelDePesquisa
+{
+    background-color: lightgray;
+    padding: 15px;
+    border: 1px solid darkslategray;
+    border-radius: 5px;
+    margin-left: 75%;
+    margin-top: -3%;
+}
+
+.bordinhaSuave{
+    padding: 15px;
+    border: 1px solid lightcyan;
+    border-radius: 5px;
+}
+
+
+
+#produtoAntigo{
+    padding: 25px;
+    background-color: 	#F0FFFF;
+    border-radius: 10px;
+    border: 1px solid darkgray
+}
+
 
 .alignCenter{
     text-align: center;
+}
+
+#pareceresSobreSaida{
+    padding: 2px;
+    border: 1px solid darkslategray;
+    border-radius: 5px;
 }
 
 .container-fluid{

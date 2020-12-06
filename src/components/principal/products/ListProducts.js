@@ -182,7 +182,10 @@ export default class ListProduct extends Component{
             })
 
         }
-        if(operacao === "saida"){}
+        if(operacao === "saida")
+        {
+            window.location.href = "/saidaDeProduto/"+idProduto
+        }
         if(operacao === "editar"){}
     }
 
@@ -214,21 +217,28 @@ render(){
                                 this.state.products.map((index)=>{
                                 var buyvalue = parseFloat(index.buyvalue)
                                 var sellvalue = parseFloat(index.sellvalue)
-                                return (
-                                    <tr key={index.reference}>
-                                        <td>{index.reference}</td>
-                                        <td>{index.name}</td>
-                                        <td>{index.color}</td>
-                                        <td>{index.idsizeclothes}</td>
-                                        <td>{index.idcategory}</td>
-                                        <td>{buyvalue.toLocaleString('pt-br' , {minimumFractionDigits : 2})}</td>
-                                        <td>{sellvalue.toLocaleString('pt-br' , {minimumFractionDigits : 2})}</td>
-                                        <td>{index.quantity}</td>
-                                        <td><Button onClick={()=>{this.painelDeControle(index.idproduct , "entrada")}} variant="outline-dark botaoTabela">Entrada</Button>
-                                        <Button onClick={()=>{this.painelDeControle(index.idproduct , "saida")}} variant="outline-dark botaoTabela">Saida</Button>
-                                        <Button onClick={()=>{this.painelDeControle(index.idproduct , "editar")}} variant="outline-dark botaoTabela">Editar</Button></td>
-                                    </tr>
-                                )
+
+
+                                if(parseInt(index.quantity) > 0)
+                                {
+                                    return (
+                                        <tr key={index.reference}>
+                                            <td>{index.reference}</td>
+                                            <td>{index.name}</td>
+                                            <td>{index.color}</td>
+                                            <td>{index.idsizeclothes}</td>
+                                            <td>{index.idcategory}</td>
+                                            <td>{buyvalue.toLocaleString('pt-br' , {minimumFractionDigits : 2})}</td>
+                                            <td>{sellvalue.toLocaleString('pt-br' , {minimumFractionDigits : 2})}</td>
+                                            <td>{index.quantity}</td>
+                                            <td><Button onClick={()=>{this.painelDeControle(index.idproduct , "entrada")}} variant="outline-dark botaoTabela">Entrada</Button>
+                                            <Button onClick={()=>{this.painelDeControle(index.idproduct , "saida")}} variant="outline-dark botaoTabela">Saida</Button>
+                                            <Button onClick={()=>{this.painelDeControle(index.idproduct , "editar")}} variant="outline-dark botaoTabela">Editar</Button></td>
+                                        </tr>
+                                    )
+                                }
+
+
                             })
                             }
                     </tbody>

@@ -14,16 +14,25 @@ export default class Product {
     }
 
 
+    async ListProductForId(idProduct){
+        return fetch('http://localhost:8081/admin/listarProdutos/PorId=' + idProduct)
+        .then(res => res.json())
+    }
+
+
     async UpdateProduct(product)
     {
         
     }
     async EnterProductQuantity(idProduct , quantity , quantidadeDeItensEmEstoque)
     {
+
+        let totalQuantity = parseInt(quantity + quantidadeDeItensEmEstoque)
+
         var product = {
                 "product" : {
                     "idproduct" : idProduct,
-                    "quantity" : Number(quantity + quantidadeDeItensEmEstoque)
+                    "quantity" : totalQuantity
                 }
         }
 
@@ -73,6 +82,30 @@ export default class Product {
         })
         .then(res => {return res.json()})
         .catch(err => alert(err))
+    }
+
+
+    async SaidaEmProduto(idProduct,productQuantity , report){
+
+        const newProduct = {
+            product : {
+                idproduct : parseInt(idProduct),
+                quantity : parseInt(productQuantity - report.quantidadeARetirar)
+            }
+        }
+
+
+
+        return fetch('http://localhost:8081/admin/cadastroProduto/updateProduct', {
+            method: "POST",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            cors :true,
+            body : JSON.stringify(newProduct)
+        })
+        .then(res => res.json())
+
     }
 
 

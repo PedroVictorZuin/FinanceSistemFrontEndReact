@@ -3,6 +3,51 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem , Button} from 'react-boots
 import {Link , BrowserRouter as Router} from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./indexComponents.css"
+import Swal from 'sweetalert2'
+
+
+
+
+function entradaViaNota()
+{
+    
+    Swal.mixin({
+        input: 'text',
+        confirmButtonText: 'Proximo &rarr;',
+        showCancelButton: true,
+        progressSteps: ['1', '2', '3']
+      }).queue([
+        {
+          title: 'Dados Da Nota',
+          text: 'Por favor Informe o Numero da Nota Fiscal'
+        },
+        {
+            title: 'Dados Da Nota',
+            text: 'Por favor a quantidade de Produtos da Nota Fiscal'
+          },
+          {
+            title: 'Dados Da Nota',
+            text: 'Por favor Informe o Fornecedor da Nota Fiscal'
+          },
+      ]).then((result) => {
+        if (result.value) {
+          const answers = JSON.stringify(result.value)
+          Swal.fire({
+            title: 'Tudo certo, estamos te Redirecionando...',
+            timer : 1500,
+            icon : "success",
+            willClose : ()=>{
+                window.location.href="/lancamentoDeProdutosViaNota/" + result.value[0] +"/" + result.value[1] +"/" + result.value[2]
+            },
+            showConfirmButton : false
+          })
+        }
+      })
+
+
+
+
+}
 
 
 export default ()=>{
@@ -12,9 +57,11 @@ export default ()=>{
             <Nav className="mr-4">
                 <NavDropdown title=" Produtos"className="linkToButton" id="collasible-nav-dropdown">
                     <NavDropdown.Item ><Link className="linkToButton black" to="/cadastrarProduto">Cadastrar Produtos</Link></NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2" className="linkToButton black">Entrada em Produtos</NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.2" className="linkToButton black"><Link className="linkToButton black" to="/entradaDeProdutos">Entrada em Produtos</Link></NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item ><Link className="linkToButton black" to="/listarProdutos">Listar Produtos</Link></NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item onClick={entradaViaNota} >Entrada de Produtos Via Nota</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Notas" id="collasible-nav-dropdown" className="linkToButton">
                     <NavDropdown.Item href="#action/3.1" className="linkToButton black">Cadastrar Notas</NavDropdown.Item>
@@ -23,10 +70,10 @@ export default ()=>{
                     <NavDropdown.Item href="#action/3.4" className="linkToButton black">Listar Notas</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Fornecedores" id="collasible-nav-dropdown" className="linkToButton">
-                    <NavDropdown.Item href="#action/3.1" className="linkToButton black">Cadastrar Fornecedores</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3" className="linkToButton black">Listar Fornecedores</NavDropdown.Item>
+                    <NavDropdown.Item className="linkToButton black"><Link className="linkToButton black" to="/cadastrarFornecedor">Cadastrar Fornecedores</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link className="linkToButton black" to="/listarFornecedores">Listar Fornecedores</Link></NavDropdown.Item>
                 </NavDropdown>
-                <NavDropdown title="Notas" id="collasible-nav-dropdown" className="linkToButton">
+                <NavDropdown title="Clientes" id="collasible-nav-dropdown" className="linkToButton">
                     <NavDropdown.Item href="#action/3.1" className="linkToButton black">Cadastrar Cliente</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4" className="linkToButton black">Listar Clientes</NavDropdown.Item>
