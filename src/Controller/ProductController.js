@@ -14,6 +14,20 @@ export default class Product {
     }
 
 
+
+    async PostProductImage(image){
+        console.log(image)
+        return fetch('https://api.imgur.com/3/image' , {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Client-ID cb9373707eac26e"
+            },
+            body : image
+        })
+        .then(res => res.json())
+    }
+
     async ListProductForId(idProduct){
         return fetch('http://localhost:8081/admin/listarProdutos/PorId=' + idProduct)
         .then(res => res.json())
@@ -52,7 +66,7 @@ export default class Product {
         })
     }
 
-    async RegisterNewProduct(newProduct)
+    async RegisterNewProduct(newProduct , images)
     {
 
         const productForSend = {
@@ -66,7 +80,12 @@ export default class Product {
                     "buyvalue" : parseFloat(newProduct.buyvalue),
                     "sellvalue" : parseFloat(newProduct.sellvalue),
                     "idprovider" : parseInt(newProduct.idprovider),
-                    "quantity" : parseInt(newProduct.quantity)
+                    "quantity" : parseInt(newProduct.quantity),
+                    "image1" : images.image1,
+                    "image2" : images.image2,
+                    "image3" : images.image3,
+                    "image4" : images.image4,
+                    "image5" : images.image5,
                 } 
             }
         

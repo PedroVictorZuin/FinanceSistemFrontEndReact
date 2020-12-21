@@ -6,8 +6,7 @@ import category from  "../../../Controller/CategoryController"
 import provider from  "../../../Controller/ProviderController"
 import product from  "../../../Controller/ProductController"
 import Swal from "sweetalert2";
-import { useHistory } from "react-router-dom";
-
+import noImagePng from "../../../images/no-photo.png"
 
 const Category = new category()
 const SizeClothes = new sizeclothes()
@@ -32,6 +31,13 @@ export default class CadastrarProdutos extends Component{
                 idprovider : 0,
                 quantity : 0
             },
+            images : {
+                image1 : noImagePng,
+                image2 : noImagePng,
+                image3 : noImagePng,
+                image4 : noImagePng,
+                image5 : noImagePng,
+            },
             providers : [],
             sizeclothes : [],
             categories : []
@@ -39,6 +45,7 @@ export default class CadastrarProdutos extends Component{
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleImageChange = this.handleImageChange.bind(this);
     }
 
     async componentDidMount(){
@@ -47,6 +54,192 @@ export default class CadastrarProdutos extends Component{
         Provider.listAllProviders().then(res => {this.setState({providers : res})})
     }
 
+
+
+    handleImageChange(event) {
+
+        let subiu = 0;
+
+        let timerInterval;
+            Swal.fire({
+            title: 'Carregando Imagem ...',
+            timer: 12000,
+            timerProgressBar: true,
+            didOpen: () => {
+
+                Swal.showLoading()
+                   Product.PostProductImage(event.target.files[0])
+                   .then(data => {
+                        if(event.target.id === "fotoProdutoCapa")
+                        {
+                            if(data.data.error)
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image1 = noImagePng
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Erro",
+                                    icon : "error",
+                                    showConfirmButton : false,
+                                    html : "<p>Erro de Upload Tente Novamente mais tarde</p>",
+                                    timer : 1500
+                                })
+                            }
+                            else
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image1 = data.data.link
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Sucesso ! ",
+                                    icon : "success",
+                                    showConfirmButton : false,
+                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
+                                    timer : 1500
+                                })
+                                
+                            }
+                        }
+                        else if(event.target.id === "fotoProduto2")
+                        {
+                            if(data.data.error)
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image2 = noImagePng
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Erro",
+                                    icon : "error",
+                                    showConfirmButton : false,
+                                    html : "<p>Erro de Upload Tente Novamente mais tarde</p>",
+                                    timer : 1500
+                                })
+                            }
+                            else
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image2 = data.data.link
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Sucesso ! ",
+                                    icon : "success",
+                                    showConfirmButton : false,
+                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
+                                    timer : 1500
+                                })
+                            }
+                        }
+                        else if(event.target.id === "fotoProduto3")
+                        {
+                            if(data.data.error)
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image3 = noImagePng
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Erro",
+                                    icon : "error",
+                                    showConfirmButton : false,
+                                    html : "<p>Erro de Upload Tente Novamente mais tarde</p>",
+                                    timer : 1500
+                                })
+                            }
+                            else
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image3 = data.data.link
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Sucesso ! ",
+                                    icon : "success",
+                                    showConfirmButton : false,
+                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
+                                    timer : 1500
+                                })
+                            }
+                        }
+                        else if(event.target.id === "fotoProduto4")
+                        {
+                            if(data.data.error)
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image4 = noImagePng
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Erro",
+                                    icon : "error",
+                                    showConfirmButton : false,
+                                    html : "<p>Erro de Upload Tente Novamente mais tarde</p>",
+                                    timer : 1500
+                                })
+                            }
+                            else
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image4 = data.data.link
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Sucesso ! ",
+                                    icon : "success",
+                                    showConfirmButton : false,
+                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
+                                    timer : 1500
+                                })
+                                
+                            }
+                        }
+                        else if(event.target.id === "fotoProduto5")
+                        {
+                            if(data.data.error)
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image5 = noImagePng
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Erro",
+                                    icon : "error",
+                                    showConfirmButton : false,
+                                    html : "<p>Erro de Upload Tente Novamente mais tarde</p>",
+                                    timer : 1500
+                                })
+                            }
+                            else
+                            {
+                                Swal.close()
+                                let state = this.state
+                                state.images.image5 = data.data.link
+                                this.setState(state)
+                                Swal.fire({
+                                    title : "Sucesso ! ",
+                                    icon : "success",
+                                    showConfirmButton : false,
+                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
+                                    timer : 1500
+                                })
+                            }
+
+                        }
+                   })
+                   .catch(err=>{
+                       alert(err)
+                   })
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+            })
+
+
+    }
 
     handleChange(event) {
 
@@ -71,7 +264,7 @@ export default class CadastrarProdutos extends Component{
 
         if(this.verifyForm())
         {
-            Product.RegisterNewProduct(this.state.newProduct)
+            Product.RegisterNewProduct(this.state.newProduct , this.state.images)
             .then(res => {
                 if(res.success)
                 {
@@ -92,17 +285,25 @@ export default class CadastrarProdutos extends Component{
       }
 
 
-      verifyForm = ()=>{
-        if(this.state.newProduct.name === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Nome" , icon : "error"})}
-        else if(this.state.newProduct.description === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Descrição" , icon : "error"})}
-        else if(this.state.newProduct.reference === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Referencia" , icon : "error"})}
-        else if(this.state.newProduct.color === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Cor" , icon : "error"})}
-        else if(this.state.newProduct.idsizeclothes === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Tamanho" , icon : "error"})}
-        else if(this.state.newProduct.idcategory === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Categoria" , icon : "error"})}
-        else if(this.state.newProduct.buyvalue === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Preço de Compra" , icon : "error"})}
-        else if(this.state.newProduct.sellvalue === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Preço de Venda" , icon : "error"})}
-        else if(this.state.newProduct.idprovider === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Fornecedor" , icon : "error"})}
-        else if(this.state.newProduct.quantity === ""){return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Quantidade" , icon : "error"})}
+      verifyForm = ()=>
+      {
+          const {newProduct , images} = this.state;
+
+        if(newProduct.name === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Nome" , icon : "error"})
+        else if(newProduct.description === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Descrição" , icon : "error"})
+        else if(this.state.newProduct.reference === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Referencia" , icon : "error"})
+        else if(newProduct.color === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Cor" , icon : "error"})
+        else if(newProduct.idsizeclothes === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Tamanho" , icon : "error"})
+        else if(newProduct.idcategory === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Categoria" , icon : "error"})
+        else if(newProduct.buyvalue === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Preço de Compra" , icon : "error"})
+        else if(newProduct.sellvalue === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Preço de Venda" , icon : "error"})
+        else if(newProduct.idprovider === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Fornecedor" , icon : "error"})
+        else if(newProduct.quantity === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Quantidade" , icon : "error"})
+        else if(images.image1 === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Selecione a Imagem de Capa" , icon : "error"})
+        else if(images.image2 === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Selecione a Imagem 2" , icon : "error"})
+        else if(images.image3 === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Selecione a Imagem 3" , icon : "error"})
+        else if(images.image4 === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Selecione a Imagem 4" , icon : "error"})
+        else if(images.image5 === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Selecione a Imagem 5" , icon : "error"})
         else{return true}
       }
 
@@ -199,7 +400,7 @@ export default class CadastrarProdutos extends Component{
                                         {
                                             this.state.providers.map(index => {
                                                 return (
-                                                <option key={index.idprovider} value={index.idprovider}>{index.idprovider} - {index.name}</option>
+                                                    <option key={index.idprovider} value={index.idprovider}>{index.idprovider} - {index.name}</option>
                                                 )
                                             })
                                         }
@@ -212,6 +413,72 @@ export default class CadastrarProdutos extends Component{
                                 <Form.Control value={this.state.newProduct.quantity} onChange={this.handleChange} type="number" placeholder="" />
                             </Form.Group>
                         </div>
+                    </div>
+                    <div className="row col-md-12" style={{padding : "20px" , border : "solid 1px lightgray" , borderRadius : "5px" , display:"flex" , justifyContent:"space-between"}}>
+                    {/* <Form.Group>
+                        <Form.File id="imagem1Produto" onChange={this.handleImageChange} label="1" />
+                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.File id="imagem2Produto" onChange={this.handleImageChange} label="2" />
+                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.File id="imagem3Produto" onChange={this.handleImageChange} label="3" />
+                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.File id="imagem4Produto" onChange={this.handleImageChange} label="4" />
+                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.File id="imagem5Produto" onChange={this.handleImageChange} label="5" />
+                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
+                    </Form.Group> */}
+                        <div className="multiple_upload">
+                            <input type="file" onChange={this.handleImageChange} id="fotoProdutoCapa"  className="uploadChange" />
+                            <div className="message"><span>Selecionar Foto da Capa</span></div>
+                            <input type="button" className="botao" value="Upload" />
+                            <div className="lista">
+                                <img src={this.state.images.image1} alt="ImagemProduto1" width="290px" height="250px"></img>
+                            </div>
+                        </div>
+                        <div className="multiple_upload">
+                            <input type="file" onChange={this.handleImageChange} id="fotoProduto2"  className="uploadChange" />
+                            <div className="message"><span>Selecionar Foto 2</span></div>
+                            <input type="button" className="botao" value="Upload" />
+                            <div className="lista">
+                                <img src={this.state.images.image2} alt="ImagemProduto2" width="290px" height="250px"></img>
+                            </div>
+                        </div>
+                        <div className="multiple_upload">
+                            <input type="file" onChange={this.handleImageChange} id="fotoProduto3"  className="uploadChange" />
+                            <div className="message"><span>Selecionar Foto 3</span></div>
+                            <input type="button" className="botao" value="Upload" />
+                            <div className="lista">
+                                <img src={this.state.images.image3} alt="ImagemProduto3" width="290px" height="250px"></img>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row col-md-12" style={{padding : "20px" , border : "solid 1px lightgray" , borderRadius : "5px" , display:"flex" , justifyContent:"center"}}>
+                        <div className="multiple_upload">
+                            <input type="file" onChange={this.handleImageChange} id="fotoProduto4"  className="uploadChange" />
+                            <div className="message"><span>Selecionar Foto 4</span></div>
+                            <input type="button" className="botao" value="Upload" />
+                            <div className="lista">
+                                <img src={this.state.images.image4} alt="ImagemProduto4" width="290px" height="250px"></img>
+                            </div>
+                        </div>
+                        <div className="multiple_upload">
+                            <input type="file" onChange={this.handleImageChange} id="fotoProduto5"  className="uploadChange" />
+                            <div className="message"><span>Selecionar Foto 5</span></div>
+                            <input type="button" className="botao" value="Upload" />
+                            <div className="lista">
+                                <img src={this.state.images.image5} alt="ImagemProduto5" width="290px" height="250px"></img>
+                            </div>
+                        </div>
+
                     </div>
                     <div className="row col-md-12 caixadeBotoes">
                         <div className="col-md-3">

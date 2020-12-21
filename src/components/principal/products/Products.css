@@ -15,6 +15,57 @@
     border-radius: 5px;
 }
 
+@import url('http://fonts.googleapis.com/css?family=Open+Sans');
+.multiple_upload {
+      position:relative;
+      padding: 20px;
+      border: 1px solid lightgray;
+
+}
+.uploadChange {
+      position:absolute;
+      top:2px;
+      left:0;
+      opacity:0.01;
+      border:none;
+      width:200px;
+      padding:10px;
+      z-index:1;
+      cursor:pointer
+}
+.message {
+      border:2px solid #ccc;
+      background:#fff;
+      padding:10px;
+      font-family:'Open Sans';
+      width:250px;
+      float:left;
+      margin:4px;
+      overflow:hidden;
+      color: #333
+}
+.botao {
+      border:1px solid lightblue;
+      background: lightblue;
+      color:#ffffff;
+      font-family:'Open Sans';
+      font-size:15px;
+      font-weight:bold;
+      padding:12px 28px;
+      margin:4px 8px;
+}
+#multiple_upload:hover > #botao {
+      background:#662f00;
+      border-color:#662f00;
+} 
+.lista ul {
+      margin-left: -16px; 
+}
+.lista ul li {
+     border-bottom:1px solid #eee;
+     padding:10px;
+}
+
 
 .painelAddQuantity
 {

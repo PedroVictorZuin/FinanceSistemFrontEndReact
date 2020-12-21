@@ -200,6 +200,7 @@ render(){
                 <Table id="tabelaProdutos" bordered hover size="sm">
                     <thead>
                         <tr>
+                            <th>Imagem</th>
                             <th>Referência</th>
                             <th>Nome</th>
                             <th>Cor</th>
@@ -223,6 +224,7 @@ render(){
                                 {
                                     return (
                                         <tr key={index.reference}>
+                                            <td><img src={index.image1} width="166px" height="74px" style={{borderRadius : "5px"}} alt={"Image Product"}></img></td>
                                             <td>{index.reference}</td>
                                             <td>{index.name}</td>
                                             <td>{index.color}</td>
