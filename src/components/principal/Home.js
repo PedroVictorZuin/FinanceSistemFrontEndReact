@@ -11,7 +11,7 @@ export default function Home(){
                 <div id="divDeBotoes">
                     <Link to="/listarProdutos" ><Button id="botaoProdutos" ></Button></Link>
                     <Link to="/listarNotas" ><Button id="botaoNotas" ></Button></Link>
-                    <Link to="/listarVendas" ><Button id="botaoVendas" ></Button></Link>
+                    <Link to="/lancamentoPedido" ><Button id="botaoVendas" ></Button></Link>
                     <Link to="/listarFornecedores" ><Button id="botaoFornecedores" ></Button></Link>
                     <Link to="/listarRelatorios" ><Button id="botaoRelatorios" ></Button></Link>
                 </div>

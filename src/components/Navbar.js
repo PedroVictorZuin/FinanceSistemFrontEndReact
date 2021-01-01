@@ -74,13 +74,13 @@ export default ()=>{
                     <NavDropdown.Item ><Link className="linkToButton black" to="/listarFornecedores">Listar Fornecedores</Link></NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Clientes" id="collasible-nav-dropdown" className="linkToButton">
-                    <NavDropdown.Item href="#action/3.1" className="linkToButton black">Cadastrar Cliente</NavDropdown.Item>
+                <NavDropdown.Item ><Link className="linkToButton black" to="/cadastrarCliente">Cadastrar Clientes</Link></NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4" className="linkToButton black">Listar Clientes</NavDropdown.Item>
+                    <NavDropdown.Item ><Link className="linkToButton black" to="/listarClientes">Listar Clientes</Link></NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Pedidos" id="collasible-nav-dropdown" className="linkToButton">
                     <NavDropdown.Item href="#action/3.1" className="linkToButton black">Listar Pedidos</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2" className="linkToButton black">Entrada Manual de Pedidos</NavDropdown.Item>
+                    <NavDropdown.Item ><Link className="linkToButton black" to="/lancamentoPedido">Entrada Manual de Pedidos</Link></NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Relatorios" id="collasible-nav-dropdown" className="linkToButton">
                     <NavDropdown.Item href="#action/3.1" className="linkToButton black">Relatório de Notas</NavDropdown.Item>

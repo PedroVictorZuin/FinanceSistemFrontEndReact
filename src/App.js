@@ -9,6 +9,9 @@ import EntradaDeProduto from "./components/principal/products/EntradaDeProdutos"
 import CadastrarFornecedores from "./components/principal/providers/CadastrarFornecedores"
 import ListarFornecedores from "./components/principal/providers/ListarFornecedores"
 import EntradaDeProdutosViaNota from "./components/principal/products/EntradaDeProdutosViaNota"
+import CadastroDeClientes from "./components/principal/clients/cadastroClients"
+import listarClientes from "./components/principal/clients/listClients"
+import AddNewOrder from "./components/principal/orders/addNewOrder"
 
 
 function App() {
@@ -24,6 +27,9 @@ function App() {
               <Route path="/cadastrarFornecedor" component={CadastrarFornecedores} />
               <Route path="/listarFornecedores" component={ListarFornecedores} />
               <Route path="/lancamentoDeProdutosViaNota/:numeroNota/:quantidadeProdutos/:fornecedor" component={EntradaDeProdutosViaNota} />
+              <Route path="/cadastrarCliente" component={CadastroDeClientes} />
+              <Route path="/listarClientes" component={listarClientes} />
+              <Route path="/lancamentoPedido" component={AddNewOrder} />
         </div>
     </Router>
   );

@@ -29,7 +29,6 @@ export default class ListProduct extends Component{
 
     montaDatataBle()
     {
-        $('#tabelaProdutos').DataTable();
     }
 
     componentDidMount(){
@@ -186,7 +185,143 @@ export default class ListProduct extends Component{
         {
             window.location.href = "/saidaDeProduto/"+idProduto
         }
-        if(operacao === "editar"){}
+        if(operacao === "editar")
+        {
+
+            
+            this.state.products.map( async (index)=>{
+
+                if(index.idproduct === idProduto)
+                {
+                    await Swal.fire({
+                        title: 'Entrada em Produto Existente',
+                        html:
+                            "<div>"+
+                                "<div>"+
+                                    "<div class='row col-md-12'>" + 
+                                        "<div class='col-md-4'>" + 
+                                            '<label>Referência</label>' + 
+                                            '<input id="referenciaProduto" value='+index.reference+'  class="swal2-input">' +
+                                            '<input id="idProduct" type="hidden" value='+index.idproduct+'>' +
+                                        "</div>" + 
+                                        "<div class='col-md-4'>" + 
+                                            '<label>Nome</label>' + 
+                                            '<input id="nomeProduto" value='+index.name+'  class="swal2-input">' + 
+                                        "</div>" + 
+                                        "<div class='col-md-4'>" + 
+                                            '<label>Cor</label>' + 
+                                            '<input id="corProduto" value='+index.color+'  class="swal2-input">' + 
+                                        "</div>" + 
+                                    '</div>' + 
+                                    "<div class='row col-md-12'>" + 
+                                        "<div class='col-md-6'>" + 
+                                            '<label>Tamanho</label>' + 
+                                            '<input id="tamanhoProduto" value='+index.idsizeclothes+'  class="swal2-input">' + 
+                                        "</div>" + 
+                                        "<div class='col-md-6'>" + 
+                                            '<label>Categoria</label>' + 
+                                            '<input id="categoriaProduto" value='+index.idcategory+'  class="swal2-input">' + 
+                                        "</div>" + 
+                                    '</div>'+
+                                    "<div class='row col-md-12'>" + 
+                                        "<div class='col-md-4'>" + 
+                                            '<label>Preço de Compra</label>' + 
+                                            '<input id="precoCompra" value='+index.buyvalue+'  class="swal2-input">' + 
+                                        "</div>" + 
+                                        "<div class='col-md-4'>" + 
+                                            '<label>Preço de Venda</label>' + 
+                                            '<input id="precoVenda" value='+index.sellvalue+'  class="swal2-input">' + 
+                                        "</div>" +
+                                        "<div class='col-md-4'>" + 
+                                            '<label>Quantidade em Estoque</label>' + 
+                                            '<input id="quantidadeProduto" value='+index.quantity+'  class="swal2-input">' + 
+                                        "</div>" + 
+                                    '</div>'+
+                                    "<div class='row col-md-12'>" + 
+                                    "<div class='col-md-4'>" + 
+                                            '<label>Quantidade em Estoque</label>' + 
+                                            '<input id="fornecedorProduto" value='+index.idprovider+'  class="swal2-input">' + 
+                                        "</div>" + 
+                                    '</div>'+
+                                    '<hr>'+
+                                "</div>"+
+                                "<div class='col-md-12' style='background-color : lightgray;display: flex;justify-content:space-between;padding : 10px;border-radius : 10px'>"+
+                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image1+"><input type='hidden' value="+index.image1+"  id='image1'></img></div>"+
+                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image2+"> <input type='hidden' value="+index.image2+" id='image2'> </img></div>"+
+                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image3+"> <input type='hidden' value="+index.image3+" id='image3'> </img></div>"+
+                                "</div>"+
+                                "<div class='col-md-12' style='background-color : lightgray;display: flex;justify-content:center;padding : 10px;border-radius : 10px'>"+
+                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image4+"> <input type='hidden' value="+index.image4+" id='image4'> </img></div>"+
+                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image5+"> <input type='hidden' value="+index.image5+" id='image5'> </img></div>"+
+                                "</div>"+
+                            "</div>",
+                        focusConfirm: false,
+                        confirmButtonText: 'Editar →',
+                        customClass :{
+                            div : "row",
+                        },
+                        width : "100%",
+                        preConfirm: () => {
+
+                                    let product = 
+                                    {
+                                        idproduct : document.getElementById('idProduct').value,
+                                        name : document.getElementById('nomeProduto').value,
+                                        reference : document.getElementById('referenciaProduto').value,
+                                        color : document.getElementById('corProduto').value,
+                                        idsizeclothes : document.getElementById('tamanhoProduto').value,
+                                        idcategory : document.getElementById('categoriaProduto').value,
+                                        buyvalue : document.getElementById('precoCompra').value,
+                                        sellvalue : document.getElementById('precoVenda').value,
+                                        idprovider : document.getElementById('fornecedorProduto').value,
+                                        quantity : document.getElementById('quantidadeProduto').value,
+                                        image1 : document.getElementById('image1').value,
+                                        image2 : document.getElementById('image2').value,
+                                        image3 : document.getElementById('image3').value,
+                                        image4 : document.getElementById('image4').value,
+                                        image5 : document.getElementById('image5').value,
+                                    }
+
+                                    this.product.UpdateProduct(product).then(res => {
+                                        console.log(res)
+                                        if(res.success)
+                                        {
+                                            var productsState = this.state.products
+
+                                            Swal.fire({
+                                                title: "Sucesso ! ",
+                                                icon : "success",
+                                                html:"<p>Produto Editado com Sucesso !</p>",
+                                                timer : 2000,
+                                                showConfirmButton : false
+                                            })
+                                            var cont = 0
+                                            
+                                            var indice = productsState.findIndex(index => index.idproduct === parseInt(product.idproduct))
+                                            console.log(indice)
+
+                                            productsState[indice] = product
+
+                                            this.setState({products : productsState})
+                                        }
+                                        else{
+                                            Swal.fire({
+                                                title: "Erro : ",
+                                                icon : "error",
+                                                html:"<p>Produto não foi Editado !!</p>",
+                                                timer : 2000,
+                                                showConfirmButton : false
+                                            })
+                                        }
+                                    })
+                                    .catch(err => {console.log(err)})
+                        }
+                      })
+                }
+
+
+            })
+        }
     }
 
 

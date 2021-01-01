@@ -36,7 +36,24 @@ export default class Product {
 
     async UpdateProduct(product)
     {
+        const product1 = {
+            "product" : product
+        }
+
         
+
+        return fetch('http://localhost:8081/admin/cadastroProduto/updateProduct',{
+                method:"POST",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                body : JSON.stringify(product1)
+        })
+        .then(res => {
+            return res.json();
+        })
+        .catch(err =>{return err})
+
     }
     async EnterProductQuantity(idProduct , quantity , quantidadeDeItensEmEstoque)
     {
