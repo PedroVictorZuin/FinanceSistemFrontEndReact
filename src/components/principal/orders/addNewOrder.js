@@ -1,8 +1,13 @@
 import React from 'react'
 import {Table} from 'react-bootstrap'
+import Swal from 'sweetalert2'
 import clientscontroller from '../../../Controller/ClientController'
 import productscontroller from '../../../Controller/ProductController'
+import orderscontroller from '../../../Controller/OrdersController'
 
+
+
+const OrdersController = new orderscontroller();
 const ClientsController = new clientscontroller();
 const ProductsController = new productscontroller();
 
@@ -15,9 +20,13 @@ export default class AddNewOrder extends React.Component{
         this.state = {
             newOrder : {
                 numberOfOrder : 0,
+                paymant : '',
                 idclient : 0,
                 products : [],
-                totalValueForProducts : 0
+                totalValueForProducts : 0,
+                subTotalValueForProducts : 0,
+                freteTotal:0,
+                formaPagamento:'',
             },
             quantityProductForAdd : 1,
             haveProducts : false,
@@ -36,11 +45,17 @@ export default class AddNewOrder extends React.Component{
         this.handleChange = this.handleChange.bind(this)
         this.finalizarVenda = this.finalizarVenda.bind(this)
         this.changeClient = this.changeClient.bind(this)
+        this.testeDeAlteracao = this.testeDeAlteracao.bind(this)
     }
 
     componentDidMount(){
-        ClientsController.listAllClients().then(response => this.setState({clients : response}))
+        ClientsController.listAllClients().then(response => {
+            window.scrollTo(2,200)
+            this.setState({clients : response})})
+
     }
+
+
 
 
     generateOrderNumber = ()=>
@@ -75,10 +90,99 @@ export default class AddNewOrder extends React.Component{
         this.setState({state});
     }
     
-    finalizarVenda = ()=>{
-        this.generateOrderNumber()
-        console.log(this.state.newOrder)
+    finalizarVenda = async ()=>{
+
+        this.generateOrderNumber();
+
+        if(this.state.newOrder.idclient == 0)
+        {
+            Swal.fire({
+                title : "ERROR !",
+                html: "<p><strong>SELECIONE O CLIENTE</strong></p>",
+                icon : "error",
+                showConfirmButton : true,
+            })
+            return
+        }
+        if(this.state.newOrder.products.length ==0)
+        {
+            Swal.fire({
+                title : "ERROR !",
+                html: "<p><strong>ADICIONE AO MENOS 1 PRODUTO PARA REALIZAR A VENDA</strong></p>",
+                icon : "error",
+                showConfirmButton : true,
+            })
+            return
+        }
+
+        const { value: formValues } = await Swal.fire({
+            title: 'Finalizar Venda',
+            html:
+            "<div>"+
+              "<label>SubTotal</label>"+
+              '<input id="subTotal" value='+this.state.newOrder.totalValueForProducts+' readonly class="swal2-input">' +
+              "<label>Frete</label>"+
+              '<input id="freteTotal" onchange="document.getElementById(`valorTotal`).value +=  parseFloat(parseFloat(document.getElementById(`freteTotal`).value) + parseFloat(document.getElementById(`subTotal`).value)).toFixed(2)" class="swal2-input">'+
+              "<label>Forma de Pagamento</label>"+
+              '<select id="formaPagamento" class="swal2-input">'+
+                    '<option value="debito">Débito</option>'+
+                    '<option value="credito">Crédito</option>'+
+                    '<option value="dinheiro">Dinheiro</option>'+
+              '</select>'+
+              '<hr>'+
+              "<label><strong>Valor Total</strong></label>"+
+              '<input id="valorTotal" readonly class="swal2-input">'+
+            "</div>",
+            focusConfirm: false,
+            preConfirm: () => {
+                    let subTotal = document.getElementById('subTotal').value
+                    let freteTotal = document.getElementById('freteTotal').value
+                    let valorTotal = document.getElementById('valorTotal').value
+                    let formPagamento = document.getElementById('formaPagamento').value
+                    let state = this.state
+
+                    state.newOrder.subTotalValueForProducts = subTotal
+                    state.newOrder.totalValueForProducts = valorTotal
+                    state.newOrder.freteTotal = freteTotal
+                    state.newOrder.formaPagamento = formPagamento
+
+                    OrdersController.addNewOrder(state.newOrder)
+                    .then(response => {
+                        if(response.success)
+                        {
+                            Swal.fire({
+                                title : "Sucesso !",
+                                html: "<p>Venda Gerada com Sucesso !</p>",
+                                icon : "success",
+                                timer : 2000,
+                                showConfirmButton : false,
+                                onClose : ()=>{
+                                    window.location.href = "/"
+                                }
+                            })
+                        }
+                        else if(response.errno != "")
+                        {
+                            Swal.fire({
+                                title : "ERROR !",
+                                html: "<p>"+response.sqlMessage+"</p>",
+                                icon : "error",
+                                showConfirmButton : true,
+                            })
+                        }
+                    })
+
+                    
+                    // this.setState({state})
+            }
+          })
+
+
     }
+
+    testeDeAlteracao = (element)=>{
+        console.log(element)
+  }
     handleSubmit = (eve)=>{
 
         eve.preventDefault();
@@ -108,7 +212,7 @@ export default class AddNewOrder extends React.Component{
     render(){
         return(
             <div className="container-fluid">
-                <span>Status:</span><h2>Caixa Disponível !</h2>
+                <span>Status:</span><h2>Caixa</h2><h2>{this.state.haveProducts ? 'Ocupado' : "Disponível"}</h2>
                 <div className="row" style={{padding: 10,border : '1px solid darkslategray' , borderRadius: "5px"}}>
                     <div className="col-md-2" style={{background : "#f5f5f5" , padding : "20px"}}>
                         <div className="mb-2">
@@ -118,16 +222,20 @@ export default class AddNewOrder extends React.Component{
                                     <input  className="form-control mt-2" onChange={this.handleChange} value={this.state.referenceForAdd} name="referenceForAdd"></input>
                                     <button style={{display:"none"}} className="btn btn-outline-success" type="submit"> + </button>
                                 </div>
-                                <select className="form-control mt-2">
-                                    <option className="form-control">
-                                        TESTE1
-                                    </option>
-                                </select>
                                 <span><strong>Quantidade</strong></span>
                                 <input className="form-control mt-2" onChange={this.handleChange} placeholder="Quantidade" value={this.state.quantityProductForAdd} name="quantityProductForAdd"></input>
                                 <span><strong>Desconto?</strong></span>
                                 <input className="form-control mt-2" onChange={this.handleChange} placeholder="Desconto" value={this.state.quantityForDiscount} name="quantityProductForAdd"></input>
                             </form>
+                        </div>
+                        <hr style={{background:  "black"}}></hr>
+                        <div className="mt-4">
+                                <p>Vendedor</p>
+                                <select className="form-control mt-2">
+                                    <option value="" className="form-control">
+                                        Selecione o Vendedor
+                                    </option>
+                                </select>
                         </div>
                         <hr style={{background:  "black"}}></hr>
                         <div className="mt-4">
