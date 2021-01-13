@@ -54,7 +54,7 @@ export default ()=>{
     return(
             <Navbar expand="lg" bg="dark" variant="dark">
             <Navbar.Brand><Link to="/" className="whiteTextMrsGringa">Mrs.Gringa</Link></Navbar.Brand>
-            <Nav className="mr-4">
+            <Nav className="mr-auto">
                 <NavDropdown title=" Produtos"className="linkToButton" id="collasible-nav-dropdown">
                     <NavDropdown.Item ><Link className="linkToButton black" to="/cadastrarProduto">Cadastrar Produtos</Link></NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.2" className="linkToButton black"><Link className="linkToButton black" to="/entradaDeProdutos">Entrada em Produtos</Link></NavDropdown.Item>
@@ -90,6 +90,16 @@ export default ()=>{
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.5" className="linkToButton black">Relatorio de Estoque</NavDropdown.Item>
                 </NavDropdown>
+                <NavDropdown title="Vendedores" id="collasible-nav-dropdown" className="linkToButton">
+                    <NavDropdown.Item className="linkToButton black"><Link className="linkToButton black" to="/cadastrarVendedores">Cadastrar Vendedores</Link></NavDropdown.Item>
+                    <NavDropdown.Item className="linkToButton black"><Link className="linkToButton black" to="/listarVendedores">Listar Vendedores</Link></NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action/3.4" className="linkToButton black">Cadastrar Cupom</NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.4" className="linkToButton black">Listar Cupons</NavDropdown.Item>
+                </NavDropdown>
+            </Nav>
+            <Nav>
+            <Link className="linkToButton black" to="/main/config/tabs"><Button id="botaoConfiguracoes"></Button></Link>
             </Nav>
         </Navbar>
     )

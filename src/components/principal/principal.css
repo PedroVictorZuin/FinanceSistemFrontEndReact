@@ -1,15 +1,42 @@
 
 
+.caixaDeBotoes:hover{
+    transition: all 0.3s;
+    text-decoration: none;
+    color: darkslategray;
+    box-shadow: 2px 1px 1px 1px darkslategray;
+}
+.caixaDeBotoes{
+    text-decoration: none;
+    transition: all 0.3s;
+    color: black;
+    border-radius: 10px;
+}
+
 #divDeBotoes{
     justify-content: space-between;
     align-items: center;
     margin-top: 2%;
     padding: 35px;
-    width: 80%;
+    width: 100%;
     border: 1px solid white;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
+    display: flex;
+}
+
+.card-title h5{
+    text-decoration: none;
+}
+
+.divBotao{
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid black;
+    width: 100%;
 }
 
 
@@ -20,7 +47,8 @@
     background-color: transparent;
     border: none;
     padding: 10px;
-    margin-right: 5%;
+    margin-right: auto;
+    margin-left: auto;
 }
 #botaoNotas{
     background-image: url("../../images/bill.png");
@@ -29,7 +57,8 @@
     background-color: transparent;
     border: none;
     padding: 10px;
-    margin-right: 5%;
+    margin-right: auto;
+    margin-left: auto;
 }
 #botaoVendas{
     background-image: url("../../images/goods.png");
@@ -38,7 +67,8 @@
     background-color: transparent;
     border: none;
     padding: 10px;
-    margin-right: 5%;
+    margin-right: auto;
+    margin-left: auto;
 }
 #botaoFornecedores{
     background-image: url("../../images/service.png");
@@ -47,7 +77,8 @@
     background-color: transparent;
     border: none;
     padding: 10px;
-    margin-right: 5%;
+    margin-right: auto;
+    margin-left: auto;
 }
 #botaoRelatorios{
     background-image: url("../../images/diagram.png");
@@ -56,7 +87,8 @@
     background-color: transparent;
     border: none;
     padding: 10px;
-    margin-right: 5%;
+    margin-right: auto;
+    margin-left: auto;
 }
 #botaoMrsGringa{
     background-image: url("../../images/mrsgringa.png");

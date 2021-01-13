@@ -4,10 +4,12 @@ import Swal from 'sweetalert2'
 import clientscontroller from '../../../Controller/ClientController'
 import productscontroller from '../../../Controller/ProductController'
 import orderscontroller from '../../../Controller/OrdersController'
+import salesmancontroller from '../../../Controller/SalesmanController'
 
 
 
 const OrdersController = new orderscontroller();
+const SalesmanController = new salesmancontroller();
 const ClientsController = new clientscontroller();
 const ProductsController = new productscontroller();
 
@@ -27,7 +29,9 @@ export default class AddNewOrder extends React.Component{
                 subTotalValueForProducts : 0,
                 freteTotal:0,
                 formaPagamento:'',
+                idsaleman : 0
             },
+            salesman : [],
             quantityProductForAdd : 1,
             haveProducts : false,
             referenceForAdd : "",
@@ -45,6 +49,7 @@ export default class AddNewOrder extends React.Component{
         this.handleChange = this.handleChange.bind(this)
         this.finalizarVenda = this.finalizarVenda.bind(this)
         this.changeClient = this.changeClient.bind(this)
+        this.changeSaleman = this.changeSaleman.bind(this)
         this.testeDeAlteracao = this.testeDeAlteracao.bind(this)
     }
 
@@ -52,12 +57,19 @@ export default class AddNewOrder extends React.Component{
         ClientsController.listAllClients().then(response => {
             window.scrollTo(2,200)
             this.setState({clients : response})})
-
+        SalesmanController.listAllSalesman()
+        .then(resp => this.setState({salesman : resp}))
     }
 
 
 
 
+    changeSaleman = (event)=>{
+        let newOrder = this.state.newOrder
+        let idsaleman = event.target.value
+        newOrder.idsaleman = idsaleman
+        this.setState({newOrder})
+    }
     generateOrderNumber = ()=>
     {
         var state = this.state
@@ -231,10 +243,17 @@ export default class AddNewOrder extends React.Component{
                         <hr style={{background:  "black"}}></hr>
                         <div className="mt-4">
                                 <p>Vendedor</p>
-                                <select className="form-control mt-2">
+                                <select onChange={this.changeSaleman} className="form-control mt-2">
                                     <option value="" className="form-control">
                                         Selecione o Vendedor
                                     </option>
+                                    {this.state.salesman.map(index => {
+                                        return(
+                                            <option value={index.idsaleman} className="form-control">
+                                                {index.name}
+                                            </option>
+                                        )
+                                    })}
                                 </select>
                         </div>
                         <hr style={{background:  "black"}}></hr>

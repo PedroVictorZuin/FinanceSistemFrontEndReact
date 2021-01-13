@@ -12,6 +12,10 @@ import EntradaDeProdutosViaNota from "./components/principal/products/EntradaDeP
 import CadastroDeClientes from "./components/principal/clients/cadastroClients"
 import listarClientes from "./components/principal/clients/listClients"
 import AddNewOrder from "./components/principal/orders/addNewOrder"
+import CadastrarVendedores from "./components/principal/saleman/cadastrarVendedores"
+import ListarVendedores from "./components/principal/saleman/listarVendedores"
+import ListAllConfig from "./components/principal/config"
+
 
 
 function App() {
@@ -30,6 +34,9 @@ function App() {
               <Route path="/cadastrarCliente" component={CadastroDeClientes} />
               <Route path="/listarClientes" component={listarClientes} />
               <Route path="/lancamentoPedido" component={AddNewOrder} />
+              <Route path="/listarVendedores" component={ListarVendedores} />
+              <Route path="/cadastrarVendedores" component={CadastrarVendedores} />
+              <Route path="/main/config/tabs" component={ListAllConfig} />
         </div>
     </Router>
   );

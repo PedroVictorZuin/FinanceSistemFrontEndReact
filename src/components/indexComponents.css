@@ -9,6 +9,17 @@
     transition: all 0.3s;
 }
 
+#botaoConfiguracoes{
+    background-image: url("../images/settings.png");
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .whiteText:hover{
     color: white;
     font-size: 30px;
