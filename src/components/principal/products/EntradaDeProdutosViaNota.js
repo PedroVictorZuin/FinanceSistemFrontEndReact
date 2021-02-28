@@ -107,10 +107,10 @@ export default class EntradaDeProdutosViaNota extends React.Component
                 if(i > 0)
                 {
                     var tr = "<tr key='linhaProduto"+i+"' id='linhaProduto"+i+"'>" +
-                    "<td><input type='text' class='form-control' id='nomeProduto"+i+"'/></td>"+
-                    "<td><input type='text' class='form-control' id='descricaoProduto"+i+"'/></td>"+
-                    "<td><input type='text' class='form-control' id='referencia"+i+"'/></td>"+
-                    "<td><select class='form-control' id='corProduto"+i+"'>"+
+                    "<td><input type='text' className='form-control' id='nomeProduto"+i+"'/></td>"+
+                    "<td><input type='text' className='form-control' id='descricaoProduto"+i+"'/></td>"+
+                    "<td><input type='text' className='form-control' id='referencia"+i+"'/></td>"+
+                    "<td><select className='form-control' id='corProduto"+i+"'>"+
                             "<option value='default'>Selecione</option>"+
                             "<option>Preto</option>"+
                             "<option>Branco</option>"+
@@ -120,18 +120,18 @@ export default class EntradaDeProdutosViaNota extends React.Component
                             "<option>Azul</option>"+
                             "<option>Roxo</option>"+
                     "</select></td>"+
-                    "<td><select class='form-control' id='sizeClothes"+i+"'>"+
+                    "<td><select className='form-control' id='sizeClothes"+i+"'>"+
                         Tamanhos +
                     "</select></td>"+
-                    "<td><select class='form-control' id='category"+i+"'>"+
+                    "<td><select className='form-control' id='category"+i+"'>"+
                         Categorias +
                     "</select></td>"+
-                    "<td><input type='number' class='form-control' id='precoCompra"+i+"'/></td>"+
-                    "<td><input type='number' class='form-control' id='precoVenda"+i+"'/></td>"+
-                    "<td><select type='text' class='form-control' id='forncedor"+i+"'>"+
+                    "<td><input type='number' className='form-control' id='precoCompra"+i+"'/></td>"+
+                    "<td><input type='number' className='form-control' id='precoVenda"+i+"'/></td>"+
+                    "<td><select type='text' className='form-control' id='forncedor"+i+"'>"+
                     Fornecedores + 
                     "</select></td>"+
-                    "<td><input type='number' class='form-control' id='quantidade"+i+"'/></td>"+
+                    "<td><input type='number' className='form-control' id='quantidade"+i+"'/></td>"+
                 "</tr>"
                     document.getElementById('corpoLancamentos').innerHTML += tr
                 }

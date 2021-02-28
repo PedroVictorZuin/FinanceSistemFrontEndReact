@@ -1,7 +1,9 @@
+import Enviroments from '../enviroments/enviroment-homolg'
+
 export default class SizeClothes {
 
     listAllSizeClothes(){
-        return fetch('http://localhost:8081/admin/listarTamanhoDePecas',{
+        return fetch(Enviroments.URL + '/admin/listarTamanhoDePecas',{
             method: "GET",
             headers : {
                 "ContentType" : "application/json"

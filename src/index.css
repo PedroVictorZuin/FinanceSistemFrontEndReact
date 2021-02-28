@@ -12,6 +12,20 @@
     align-items: center;
 }
 
+
+
+#containerLogin{
+    background-color: #FFF5EE;
+    padding: 25px;
+    width: 100%;
+    border: 1px solid lightsalmon;
+    border-radius: 5px;
+}
+
+.displayNoneGeral{
+    display:none;
+}
+
 #root{
     text-align: center;
     justify-content: center;

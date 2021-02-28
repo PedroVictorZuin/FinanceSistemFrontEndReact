@@ -1,8 +1,10 @@
+import Enviroments from '../enviroments/enviroment-homolg'
+
 export default class Product {
 
     async ListProductAll()
     {
-        return fetch('http://localhost:8081/admin/listarProdutos' , {
+        return fetch(Enviroments.URL+'/admin/listarProdutos' , {
             method : "GET",
             headers : {
                 "Content-Type" : "application/json;charset=utf-8",
@@ -26,10 +28,11 @@ export default class Product {
             body : image
         })
         .then(res => res.json())
+        .catch(err => console.log(err))
     }
 
     async ListProductForId(idProduct){
-        return fetch('http://localhost:8081/admin/listarProdutos/PorId=' + idProduct)
+        return fetch(Enviroments.URL+'/admin/listarProdutos/PorId=' + idProduct)
         .then(res => res.json())
     }
 
@@ -42,7 +45,7 @@ export default class Product {
 
         
 
-        return fetch('http://localhost:8081/admin/cadastroProduto/updateProduct',{
+        return fetch(Enviroments.URL+'/admin/cadastroProduto/updateProduct',{
                 method:"POST",
                 headers : {
                     "Content-Type" : "application/json"
@@ -67,7 +70,7 @@ export default class Product {
                 }
         }
 
-        return fetch('http://localhost:8081/admin/cadastroProduto/updateProduct' , 
+        return fetch(Enviroments.URL+'/admin/cadastroProduto/updateProduct' , 
             {
                 method : "POST",
                 headers : {
@@ -108,7 +111,7 @@ export default class Product {
         
             
 
-        return fetch('http://localhost:8081/admin/cadastroProduto/addProduct' , {
+        return fetch(Enviroments.URL+'/admin/cadastroProduto/addProduct' , {
             method: "POST",
             headers : {
                 "Content-Type" : "application/json"
@@ -130,9 +133,17 @@ export default class Product {
             }
         }
 
+        const newReport = {
+            report : {
+                reason_exit : "TESTEVIAREACT",
+                desc_reason_exit : "TESTEVIAREACTDESCRICAO",
+                id_user : 1,
+                id_product : 3,
+                quantity_exit : 1,
+            }
+        }
 
-
-        return fetch('http://localhost:8081/admin/cadastroProduto/updateProduct', {
+        await fetch(Enviroments.URL+'/admin/cadastroProduto/updateProduct', {
             method: "POST",
             headers : {
                 "Content-Type" : "application/json"
@@ -140,9 +151,23 @@ export default class Product {
             cors :true,
             body : JSON.stringify(newProduct)
         })
-        .then(res => res.json())
+        .then(async res => {
+            await fetch(Enviroments.URL + "/admin/product/exitProductReport" ,{
+                    method : "POST" , 
+                    headers : {
+                        "Content-Type" : "application/json"
+                    },
+                    cors :true,
+                    body : JSON.stringify(newReport)
+                }
+            )
+            .then(response => console.log(response))
+        })
+
+
 
     }
+
 
 
 }

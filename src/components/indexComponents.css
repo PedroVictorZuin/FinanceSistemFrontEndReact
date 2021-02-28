@@ -2,6 +2,19 @@
     background-color: antiquewhite;
 }
 
+.displayNoneGeral {
+    display: none;
+}
+
+.white{
+    color : white;
+    margin-left: 10%;
+}
+.white:hover{
+    color : #C3C3C3;
+    text-decoration: none;
+    margin-left: 2%;
+}
 
 .linkToButton{
     text-decoration: none;

@@ -132,18 +132,18 @@ export default class AddNewOrder extends React.Component{
             html:
             "<div>"+
               "<label>SubTotal</label>"+
-              '<input id="subTotal" value='+this.state.newOrder.totalValueForProducts+' readonly class="swal2-input">' +
+              '<input id="subTotal" value='+this.state.newOrder.totalValueForProducts+' readonly className="swal2-input">' +
               "<label>Frete</label>"+
-              '<input id="freteTotal" onchange="document.getElementById(`valorTotal`).value +=  parseFloat(parseFloat(document.getElementById(`freteTotal`).value) + parseFloat(document.getElementById(`subTotal`).value)).toFixed(2)" class="swal2-input">'+
+              '<input id="freteTotal" onchange="document.getElementById(`valorTotal`).value +=  parseFloat(parseFloat(document.getElementById(`freteTotal`).value) + parseFloat(document.getElementById(`subTotal`).value)).toFixed(2)" className="swal2-input">'+
               "<label>Forma de Pagamento</label>"+
-              '<select id="formaPagamento" class="swal2-input">'+
+              '<select id="formaPagamento" className="swal2-input">'+
                     '<option value="debito">Débito</option>'+
                     '<option value="credito">Crédito</option>'+
                     '<option value="dinheiro">Dinheiro</option>'+
               '</select>'+
               '<hr>'+
               "<label><strong>Valor Total</strong></label>"+
-              '<input id="valorTotal" readonly class="swal2-input">'+
+              '<input id="valorTotal" readonly className="swal2-input">'+
             "</div>",
             focusConfirm: false,
             preConfirm: () => {

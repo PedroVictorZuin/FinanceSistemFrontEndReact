@@ -73,8 +73,13 @@ export default class ListProduct extends Component{
         var produtosState = this.state.products
         if(operacao === "entrada")
         {
-            this.state.products.map( async (index)=>{
 
+
+            
+            this.state.products.map( async (index)=>{
+                
+                var testeValor = parseFloat(index.buyvalue).toLocaleString('pt-br' , {minimumFractionDigits : 2})
+                var testeValor1 = parseFloat(index.sellvalue).toLocaleString('pt-br' , {minimumFractionDigits : 2})
                 if(index.idproduct === idProduto)
                 {
                     await Swal.fire({
@@ -83,26 +88,24 @@ export default class ListProduct extends Component{
                             "<div>"+
                                 "<div>"+
                                     "<div class='row col-md-12'>" + 
-                                        "<div class='col-md-4'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Referência</label>' + 
                                             '<input id="referenciaProduto" value='+index.reference+' readonly class="swal2-input">' +
                                             '<input id="idProduct" type="hidden" value='+index.idproduct+'>' +
                                         "</div>" + 
-                                        "<div class='col-md-4'>" + 
+                                        "<div class='col-md-3'>" + 
                                             '<label>Nome</label>' + 
                                             '<input id="nomeProduto" value='+index.name+' readonly class="swal2-input">' + 
                                         "</div>" + 
-                                        "<div class='col-md-4'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Cor</label>' + 
                                             '<input id="corProduto" value='+index.color+' readonly class="swal2-input">' + 
                                         "</div>" + 
-                                    '</div>' + 
-                                    "<div class='row col-md-12'>" + 
-                                        "<div class='col-md-6'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Tamanho</label>' + 
                                             '<input id="tamanhoProduto" value='+index.idsizeclothes+' readonly class="swal2-input">' + 
                                         "</div>" + 
-                                        "<div class='col-md-6'>" + 
+                                        "<div class='col-md-3'>" + 
                                             '<label>Categoria</label>' + 
                                             '<input id="categoriaProduto" value='+index.idcategory+' readonly class="swal2-input">' + 
                                         "</div>" + 
@@ -110,21 +113,21 @@ export default class ListProduct extends Component{
                                     "<div class='row col-md-12'>" + 
                                         "<div class='col-md-4'>" + 
                                             '<label>Preço de Compra</label>' + 
-                                            '<input id="precoCompra" value='+index.buyvalue+' readonly class="swal2-input">' + 
+                                            '<input id="precoCompra" value='+testeValor+' readonly class="swal2-input">' + 
                                         "</div>" + 
                                         "<div class='col-md-4'>" + 
                                             '<label>Preço de Venda</label>' + 
-                                            '<input id="precoVenda" value='+index.sellvalue+' readonly class="swal2-input">' + 
+                                            '<input id="precoVenda" value='+testeValor1+' readonly class="swal2-input">' + 
                                         "</div>" + 
                                         "<div class='col-md-4'>" + 
-                                            '<label>Quantidade em Estoque</label>' + 
+                                            '<label>Qtd.Estoque</label>' + 
                                             '<input id="quantidadeProduto" value='+index.quantity+' readonly class="swal2-input">' + 
                                         "</div>" + 
                                     '</div>'+
                                     '<hr>'+
                                 "</div>"+
-                                "<div class='col-md-12' style='background-color : 'lightgray''>"+
-                                        "<div class='col-md-4'>"+
+                                "<div class='col-md-12 allcenter'>"+
+                                        "<div class='col-md-6'>"+
                                             '<label><strong>Quantidade a se Adicionar</strong></label>' +
                                             '<input type="number" id="quantidadeASeAdd" class="swal2-input">'+
                                         "</div>"+
@@ -194,65 +197,58 @@ export default class ListProduct extends Component{
                 if(index.idproduct === idProduto)
                 {
                     await Swal.fire({
-                        title: 'Entrada em Produto Existente',
+                        title: 'Editar Produto',
                         html:
                             "<div>"+
                                 "<div>"+
                                     "<div class='row col-md-12'>" + 
-                                        "<div class='col-md-4'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Referência</label>' + 
-                                            '<input id="referenciaProduto" value='+index.reference+'  class="swal2-input">' +
+                                            '<input id="referenciaProduto"  value='+index.reference+'  class="swal2-input">' +
                                             '<input id="idProduct" type="hidden" value='+index.idproduct+'>' +
                                         "</div>" + 
-                                        "<div class='col-md-4'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Nome</label>' + 
-                                            '<input id="nomeProduto" value='+index.name+'  class="swal2-input">' + 
+                                            '<input id="nomeProduto"  value='+index.name+'  class="swal2-input">' + 
                                         "</div>" + 
-                                        "<div class='col-md-4'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Cor</label>' + 
-                                            '<input id="corProduto" value='+index.color+'  class="swal2-input">' + 
+                                            '<input id="corProduto"  value='+index.color+'  class="swal2-input">' + 
                                         "</div>" + 
-                                    '</div>' + 
-                                    "<div class='row col-md-12'>" + 
-                                        "<div class='col-md-6'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Tamanho</label>' + 
-                                            '<input id="tamanhoProduto" value='+index.idsizeclothes+'  class="swal2-input">' + 
+                                            '<input id="tamanhoProduto"  value='+index.idsizeclothes+'  class="swal2-input">' + 
                                         "</div>" + 
-                                        "<div class='col-md-6'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Categoria</label>' + 
-                                            '<input id="categoriaProduto" value='+index.idcategory+'  class="swal2-input">' + 
+                                            '<input id="categoriaProduto"  value='+index.idcategory+'  class="swal2-input">' + 
                                         "</div>" + 
-                                    '</div>'+
-                                    "<div class='row col-md-12'>" + 
-                                        "<div class='col-md-4'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Preço de Compra</label>' + 
-                                            '<input id="precoCompra" value='+index.buyvalue+'  class="swal2-input">' + 
+                                            '<input id="precoCompra"  value='+index.buyvalue+'  class="swal2-input">' + 
                                         "</div>" + 
-                                        "<div class='col-md-4'>" + 
+                                        "<div class='row col-md-12'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Preço de Venda</label>' + 
-                                            '<input id="precoVenda" value='+index.sellvalue+'  class="swal2-input">' + 
+                                            '<input id="precoVenda"  value='+index.sellvalue+'  class="swal2-input">' + 
                                         "</div>" +
-                                        "<div class='col-md-4'>" + 
+                                        "<div class='col-md-2'>" + 
                                             '<label>Quantidade em Estoque</label>' + 
-                                            '<input id="quantidadeProduto" value='+index.quantity+'  class="swal2-input">' + 
+                                            '<input id="quantidadeProduto"  value='+index.quantity+'  class="swal2-input">' + 
                                         "</div>" + 
-                                    '</div>'+
-                                    "<div class='row col-md-12'>" + 
-                                    "<div class='col-md-4'>" + 
-                                            '<label>Quantidade em Estoque</label>' + 
-                                            '<input id="fornecedorProduto" value='+index.idprovider+'  class="swal2-input">' + 
-                                        "</div>" + 
-                                    '</div>'+
+                                        "<div class='col-md-2'>" + 
+                                                '<label>Quantidade em Estoque</label>' + 
+                                                '<input id="fornecedorProduto"  value='+index.idprovider+'  class="swal2-input">' + 
+                                            "</div>" + 
+                                        '</div>'+
                                     '<hr>'+
                                 "</div>"+
                                 "<div class='col-md-12' style='background-color : lightgray;display: flex;justify-content:space-between;padding : 10px;border-radius : 10px'>"+
-                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image1+"><input type='hidden' value="+index.image1+"  id='image1'></img></div>"+
-                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image2+"> <input type='hidden' value="+index.image2+" id='image2'> </img></div>"+
-                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image3+"> <input type='hidden' value="+index.image3+" id='image3'> </img></div>"+
-                                "</div>"+
-                                "<div class='col-md-12' style='background-color : lightgray;display: flex;justify-content:center;padding : 10px;border-radius : 10px'>"+
-                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image4+"> <input type='hidden' value="+index.image4+" id='image4'> </img></div>"+
-                                        "<div class='col-md-4'><input type='file' /><img  width='200px'  height='200px' src="+index.image5+"> <input type='hidden' value="+index.image5+" id='image5'> </img></div>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem1'>Enviar arquivo 1</label><input name='imagem1' id='imagem1' type='file' /><img  width='120px'  height='120px' src="+index.image1+"><input type='hidden' value="+index.image1+"  id='image1'></img></div>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem2'>Enviar arquivo 2</label><input name='imagem2' id='imagem2' type='file' /><img  width='120px'  height='120px' src="+index.image2+"> <input type='hidden' value="+index.image2+" id='image2'> </img></div>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem3'>Enviar arquivo 3</label><input name='imagem3' id='imagem3' type='file' /><img  width='120px'  height='120px' src="+index.image3+"> <input type='hidden' value="+index.image3+" id='image3'> </img></div>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem4'>Enviar arquivo 4</label><input name='imagem4' id='imagem4' type='file' /><img  width='120px'  height='120px' src="+index.image4+"> <input type='hidden' value="+index.image4+" id='image4'> </img></div>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem5'>Enviar arquivo 5</label><input name='imagem5' id='imagem5' type='file' /><img  width='120px'  height='120px' src="+index.image5+"> <input type='hidden' value="+index.image5+" id='image5'> </img></div>"+
                                 "</div>"+
                             "</div>",
                         focusConfirm: false,
@@ -262,6 +258,7 @@ export default class ListProduct extends Component{
                         },
                         width : "100%",
                         preConfirm: () => {
+
 
                                     let product = 
                                     {

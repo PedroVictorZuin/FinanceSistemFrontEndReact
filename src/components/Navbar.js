@@ -1,9 +1,12 @@
 import React from "react";
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem , Button} from 'react-bootstrap';
-import {Link , BrowserRouter as Router} from "react-router-dom"
+import { useSelector } from 'react-redux';
+import { Navbar, Nav,DropdownButton,Dropdown,Figure, NavDropdown} from 'react-bootstrap';
+import {Link} from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./indexComponents.css"
+import {useDispatch} from 'react-redux'
 import Swal from 'sweetalert2'
+import {changeAuthenticated} from '../store/ducks/user'
 
 
 
@@ -31,7 +34,6 @@ function entradaViaNota()
           },
       ]).then((result) => {
         if (result.value) {
-          const answers = JSON.stringify(result.value)
           Swal.fire({
             title: 'Tudo certo, estamos te Redirecionando...',
             timer : 1500,
@@ -50,18 +52,46 @@ function entradaViaNota()
 }
 
 
-export default ()=>{
+export default  function(){
+
+
+  
+  
+  const user = useSelector(state => state.user[0])
+  
+  console.log(user)
+  
+  const dispatch = useDispatch()
+
+  function loggout(){
+  
+    const loggout = {
+      user : "",
+      nivel : "",
+      email : "",
+      authenticated : false,
+  }
+
+
+    localStorage.setItem('user' , JSON.stringify(loggout))
+    dispatch(changeAuthenticated(loggout))
+    
+  }
+
     return(
             <Navbar expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand><Link to="/" className="whiteTextMrsGringa">Mrs.Gringa</Link></Navbar.Brand>
-            <Nav className="mr-auto">
-                <NavDropdown title=" Produtos"className="linkToButton" id="collasible-nav-dropdown">
+            <Navbar.Brand><Link to="/" className="whiteTextMrsGringa">Mrs.Gringa</Link></Navbar.Brand>  
+            <Nav className={!user.authenticated ? "mr-auto displayNoneGeral" : "mr-auto navbar-nav"}>
+                <NavDropdown title=" Produtos/Categorias"className="linkToButton" id="collasible-nav-dropdown">
                     <NavDropdown.Item ><Link className="linkToButton black" to="/cadastrarProduto">Cadastrar Produtos</Link></NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.2" className="linkToButton black"><Link className="linkToButton black" to="/entradaDeProdutos">Entrada em Produtos</Link></NavDropdown.Item>
-                    <NavDropdown.Divider />
                     <NavDropdown.Item ><Link className="linkToButton black" to="/listarProdutos">Listar Produtos</Link></NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item onClick={entradaViaNota} >Entrada de Produtos Via Nota</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item ><Link className="linkToButton black" to="/cadastrarProduto">Cadastrar Categoria</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link className="linkToButton black" to="/cadastrarProduto">Listar Categorias</Link></NavDropdown.Item>
+
                 </NavDropdown>
                 <NavDropdown title="Notas" id="collasible-nav-dropdown" className="linkToButton">
                     <NavDropdown.Item href="#action/3.1" className="linkToButton black">Cadastrar Notas</NavDropdown.Item>
@@ -79,7 +109,7 @@ export default ()=>{
                     <NavDropdown.Item ><Link className="linkToButton black" to="/listarClientes">Listar Clientes</Link></NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Pedidos" id="collasible-nav-dropdown" className="linkToButton">
-                    <NavDropdown.Item href="#action/3.1" className="linkToButton black">Listar Pedidos</NavDropdown.Item>
+                    <NavDropdown.Item ><Link className="linkToButton black" to="/listarPedidos">Listar Pedidos</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link className="linkToButton black" to="/lancamentoPedido">Entrada Manual de Pedidos</Link></NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Relatorios" id="collasible-nav-dropdown" className="linkToButton">
@@ -98,8 +128,38 @@ export default ()=>{
                     <NavDropdown.Item href="#action/3.4" className="linkToButton black">Listar Cupons</NavDropdown.Item>
                 </NavDropdown>
             </Nav>
-            <Nav>
-            <Link className="linkToButton black" to="/main/config/tabs"><Button id="botaoConfiguracoes"></Button></Link>
+            <Nav className={!user.authenticated ? "displayNoneGeral" : "navbar-nav"}>
+            <Link className="linkToButton black" to="/main/config/tabs"></Link>
+            
+            
+              <DropdownButton
+                menuAlign="right"
+                id="dropdown-menu-align-right"
+                id="botaoConfiguracoes"
+              >
+                <Dropdown.Item style={{display:"flex" , justifyContent: "center" , alignItens : "center" , textAlign : "center"}}>
+                  <Figure>
+                    <Figure.Image
+                      width={170}
+                      height={180}
+                      alt="170x180"
+                      src="https://image.flaticon.com/icons/png/512/147/147144.png"
+                    />
+                    <Figure.Caption>
+                      {user.user} - <strong>Vendedor Nível {user.exp}</strong>
+                    </Figure.Caption>
+                  </Figure>
+                </Dropdown.Item>
+                <Dropdown.Item  style={{textAlign:"center"}}>Editar Perfil</Dropdown.Item>
+                <Dropdown.Item  style={{textAlign:"center"}}eventKey="3">Minhas Vendas</Dropdown.Item>
+                <Dropdown.Item  style={{textAlign:"center"}}eventKey="4">Meus Produtos</Dropdown.Item>
+                <Dropdown.Item  style={{textAlign:"center"}}eventKey="4">Configurações</Dropdown.Item>
+                <Dropdown.Divider />
+                <Link to="/" onClick={loggout} className=""><Dropdown.Item style={{textAlign:"center"}} eventKey="2">Sair</Dropdown.Item></Link>
+              </DropdownButton>
+              
+            
+
             </Nav>
         </Navbar>
     )

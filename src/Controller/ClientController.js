@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import Enviroments from '../enviroments/enviroment-homolg'
 
 export default class clientController{
 
@@ -19,7 +20,7 @@ export default class clientController{
             const newClientForAdd = {
                 client : newClient
             }
-            return fetch('http://localhost:8081/admin/cadastroCliente/newClient' , {
+            return fetch(Enviroments.URL+'/admin/cadastroCliente/newClient' , {
                 method : "POST",
                 headers : {
                     "Content-Type" : "application/json"
@@ -36,7 +37,7 @@ export default class clientController{
 
 
     listAllClients = async ()=>{
-        return fetch('http://localhost:8081/admin/cadastroClientes',
+        return fetch(Enviroments.URL+'/admin/cadastroClientes',
         {
             method : "GET",
         })

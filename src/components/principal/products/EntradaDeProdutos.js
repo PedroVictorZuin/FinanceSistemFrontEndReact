@@ -121,11 +121,11 @@ export default class EntradaDeProduto extends React.Component {
 
                 let linhaProduto = 
                 "<tr>"+
-                    "<td><input name='idProdutoSelecionado' readonly class='form-control' value="+res[0].idproduct+" /></td>"+
-                    "<td><input name='nomeProdutoSelecionado' readonly class='form-control' value="+res[0].name+" /></td>"+
-                    "<td><input name='referenciaProdutoSelecionado' readonly class='form-control' value="+res[0].reference+" /></td>"+
-                    "<td><input name='corProdutoSelecionado' readonly class='form-control' value="+res[0].color+" /></td>"+
-                    "<td><input name='quantidadeProdutoSelecionado' readonly class='form-control' value="+res[0].quantity+" /></td>"+
+                    "<td><input name='idProdutoSelecionado' readonly className='form-control' value="+res[0].idproduct+" /></td>"+
+                    "<td><input name='nomeProdutoSelecionado' readonly className='form-control' value="+res[0].name+" /></td>"+
+                    "<td><input name='referenciaProdutoSelecionado' readonly className='form-control' value="+res[0].reference+" /></td>"+
+                    "<td><input name='corProdutoSelecionado' readonly className='form-control' value="+res[0].color+" /></td>"+
+                    "<td><input name='quantidadeProdutoSelecionado' readonly className='form-control' value="+res[0].quantity+" /></td>"+
                 "</tr>"
                 document.getElementById('produtoPesquisado').innerHTML += linhaProduto
             })

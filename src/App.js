@@ -14,30 +14,65 @@ import listarClientes from "./components/principal/clients/listClients"
 import AddNewOrder from "./components/principal/orders/addNewOrder"
 import CadastrarVendedores from "./components/principal/saleman/cadastrarVendedores"
 import ListarVendedores from "./components/principal/saleman/listarVendedores"
+import ListarPedidos from "./components/principal/orders/listaOrders"
 import ListAllConfig from "./components/principal/config"
+import DetailsOrder from "./components/principal/orders/detalhesDoPedido"
+import Login from './components/login/index'
+
+import {useSelector} from 'react-redux';
+
+
 
 
 
 function App() {
+
+  const user = useSelector(state => state.user[0])
+
+
+  function verificaAutenticacao()
+  {
+    if(user.authenticated)
+    {
+      return (
+        <div className={!user.authenticated ? "displayNoneGeral" : ""} id="principalContent">
+          <Route exact path="/" component={Home} />
+          <Route path="/listarProdutos" component={ListProducts} />
+          <Route path="/cadastrarProduto" component={CadastrarProdutos} />
+          <Route path="/saidaDeProduto/:id" component={SaidaDeProduto} />
+          <Route path="/entradaDeProdutos" component={EntradaDeProduto} />
+          <Route path="/cadastrarFornecedor" component={CadastrarFornecedores} />
+          <Route path="/listarFornecedores" component={ListarFornecedores} />
+          <Route path="/lancamentoDeProdutosViaNota/:numeroNota/:quantidadeProdutos/:fornecedor" component={EntradaDeProdutosViaNota} />
+          <Route path="/cadastrarCliente" component={CadastroDeClientes} />
+          <Route path="/listarClientes" component={listarClientes} />
+          <Route path="/lancamentoPedido" component={AddNewOrder} />
+          <Route path="/listarVendedores" component={ListarVendedores} />
+          <Route path="/cadastrarVendedores" component={CadastrarVendedores} />
+          <Route path="/main/config/tabs" component={ListAllConfig} />
+          <Route exact path="/listarPedidos" component={ListarPedidos} />
+          <Route exact path="/listarPedidos/details/sale/:codesale" component={DetailsOrder} />
+        </div>
+      )
+    }else
+    {
+      return(
+        <div className={user.authenticated ? "displayNoneGeral" : ""} id="principalContent">
+          <Route exact path="/" component={Login} />
+        </div>
+      )
+     
+    }
+  }
+
+
+
   return (
     <Router>
         <Navbar/>
-        <div id="principalContent">
-              <Route exact path="/" component={Home} />
-              <Route path="/listarProdutos" component={ListProducts} />
-              <Route path="/cadastrarProduto" component={CadastrarProdutos} />
-              <Route path="/saidaDeProduto/:id" component={SaidaDeProduto} />
-              <Route path="/entradaDeProdutos" component={EntradaDeProduto} />
-              <Route path="/cadastrarFornecedor" component={CadastrarFornecedores} />
-              <Route path="/listarFornecedores" component={ListarFornecedores} />
-              <Route path="/lancamentoDeProdutosViaNota/:numeroNota/:quantidadeProdutos/:fornecedor" component={EntradaDeProdutosViaNota} />
-              <Route path="/cadastrarCliente" component={CadastroDeClientes} />
-              <Route path="/listarClientes" component={listarClientes} />
-              <Route path="/lancamentoPedido" component={AddNewOrder} />
-              <Route path="/listarVendedores" component={ListarVendedores} />
-              <Route path="/cadastrarVendedores" component={CadastrarVendedores} />
-              <Route path="/main/config/tabs" component={ListAllConfig} />
-        </div>
+        
+              {verificaAutenticacao()}
+       
     </Router>
   );
 }

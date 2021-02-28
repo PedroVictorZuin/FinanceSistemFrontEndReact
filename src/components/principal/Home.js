@@ -7,10 +7,10 @@ export default function Home(){
     return(
             <div className="container-fluid">
             <Button  id="botaoMrsGringa"></Button>
-                <div id="divDeBotoes">
+                <div id="divDeBotoes" className="row">
                     
                 <Link className="caixaDeBotoes" to="/listarProdutos" >
-                        <Card style={{ width: '18rem', padding : "10px" , borderRadius : "10px" }}>
+                        <Card style={{ width: '14rem', padding : "10px" , borderRadius : "10px" }}>
                             <Button id="botaoProdutos" ></Button>
                             <Card.Body>
                                 <Card.Title>Listar Produtos</Card.Title>
@@ -19,7 +19,7 @@ export default function Home(){
                 </Link>
                     
                     <Link className="caixaDeBotoes" to="/listarNotas" >
-                            <Card style={{ width: '18rem', padding : "10px" , borderRadius : "10px" }}>
+                            <Card style={{ width: '14rem', padding : "10px" , borderRadius : "10px" }}>
                             <Button id="botaoNotas" ></Button>
                                 <Card.Body>
                                     <Card.Title>Listar Notas</Card.Title>
@@ -27,7 +27,7 @@ export default function Home(){
                             </Card>
                     </Link>
                     <Link className="caixaDeBotoes" to="/lancamentoPedido" >
-                        <Card style={{ width: '18rem', padding : "10px" , borderRadius : "10px" }}>
+                        <Card style={{ width: '14rem', padding : "10px" , borderRadius : "10px" }}>
                             <Button id="botaoVendas" ></Button>
                                 <Card.Body>
                                     <Card.Title>Nova Venda</Card.Title>
@@ -35,15 +35,15 @@ export default function Home(){
                         </Card>
                     </Link>
                     <Link className="caixaDeBotoes" to="/listarFornecedores" >
-                        <Card style={{ width: '18rem', padding : "10px" , borderRadius : "10px" }}>
+                        <Card style={{ width: '14rem', padding : "10px" , borderRadius : "10px" }}>
                                 <Button id="botaoFornecedores" ></Button>
                                 <Card.Body>
-                                    <Card.Title>Listar Fornecedores</Card.Title>
+                                    <Card.Title>Fornecedores</Card.Title>
                                 </Card.Body>
                         </Card>
                     </Link>
                     <Link className="caixaDeBotoes" to="/listarRelatorios" >
-                        <Card style={{ width: '18rem', padding : "10px" , borderRadius : "10px" }}>
+                        <Card style={{ width: '14rem', padding : "10px" , borderRadius : "10px" }}>
                                 <Button id="botaoRelatorios" ></Button>
                                     <Card.Body>
                                         <Card.Title>Relatórios</Card.Title>

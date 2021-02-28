@@ -22,6 +22,28 @@
       border: 1px solid lightgray;
 
 }
+
+.allcenter
+{
+    display: flex;
+    justify-content: center;
+}
+
+input[type="file"] {
+    display: none;
+}
+.labelimage{
+    padding: 20px 10px;
+    width: 200px;
+    background-color: #333;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
 .uploadChange {
       position:absolute;
       top:2px;

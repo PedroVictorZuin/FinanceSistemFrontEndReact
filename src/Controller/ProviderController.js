@@ -1,7 +1,9 @@
+
+import Enviroments from '../enviroments/enviroment-homolg'
 export default class Provider {
 
     listAllProviders(){
-        return fetch("http://localhost:8081/admin/listarFornecedores" , {
+        return fetch(Enviroments.URL + "/admin/listarFornecedores" , {
             method : "GET",
             headers : {
                 "ContentType" : "application/json"
@@ -16,7 +18,7 @@ export default class Provider {
             "provider" : provider
         }
 
-        return fetch('http://localhost:8081/admin/cadastroFornecedor/addProvider' , {
+        return fetch(Enviroments.URL + '/admin/cadastroFornecedor/addProvider' , {
             method : "POST",
             headers : {
                 "Content-Type" : "application/json"
