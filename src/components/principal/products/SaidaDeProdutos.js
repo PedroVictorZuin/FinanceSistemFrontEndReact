@@ -123,7 +123,7 @@ export default class SaidaDeProduto extends React.Component
             }, 100)
             Product.ListProductForId(this.state.idProduct)
             .then(res => {
-                if(res.length != 0)
+                if(res.length !== 0)
                 {
                     this.setState({product : res[0]})
                     Swal.close()

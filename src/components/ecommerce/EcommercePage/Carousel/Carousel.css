@@ -1,0 +1,12 @@
+.carousselContainer{
+    margin-top: 4.8%;
+    width: 104%;
+    margin-left: -12%;
+    margin-right: auto;
+    height: 180px;
+    position: relative;
+}
+
+.carousselContainer img {
+    height: 200px;
+}

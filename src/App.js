@@ -1,25 +1,16 @@
 import Navbar from "./components/Navbar"
 import {BrowserRouter as Router , Route} from 'react-router-dom'
 import "./index.css"
-import Home from "./components/principal/Home";
-import ListProducts from "./components/principal/products/ListProducts";
-import CadastrarProdutos from "./components/principal/products/CadastrarProdutos";
-import SaidaDeProduto from "./components/principal/products/SaidaDeProdutos";
-import EntradaDeProduto from "./components/principal/products/EntradaDeProdutos"
-import CadastrarFornecedores from "./components/principal/providers/CadastrarFornecedores"
-import ListarFornecedores from "./components/principal/providers/ListarFornecedores"
-import EntradaDeProdutosViaNota from "./components/principal/products/EntradaDeProdutosViaNota"
-import CadastroDeClientes from "./components/principal/clients/cadastroClients"
-import listarClientes from "./components/principal/clients/listClients"
-import AddNewOrder from "./components/principal/orders/addNewOrder"
-import CadastrarVendedores from "./components/principal/saleman/cadastrarVendedores"
-import ListarVendedores from "./components/principal/saleman/listarVendedores"
-import ListarPedidos from "./components/principal/orders/listaOrders"
-import ListAllConfig from "./components/principal/config"
-import DetailsOrder from "./components/principal/orders/detalhesDoPedido"
-import Login from './components/login/index'
-
+import MultiCarouselPage from "./components/ecommerce/EcommercePage/EcommercePage"
+import Products from "./components/ecommerce/Products/Products"
+import Acessorios from "./components/ecommerce/ListForCategory/Acessorios/Acessorios"
+import Roupas from "./components/ecommerce/ListForCategory/Roupas/Roupas"
+import CuidadosComAPele from "./components/ecommerce/ListForCategory/CuidadosComAPele/CuidadosComAPele"
+import Maquiagens from "./components/ecommerce/ListForCategory/Maquiagens/Maquiagens"
+import HighProducts from "./components/ecommerce/ListHighProducts/ListHighProducts"
+import login from "./components/login"
 import {useSelector} from 'react-redux';
+import Home from "./components/principal/Home"
 
 
 
@@ -30,49 +21,22 @@ function App() {
   const user = useSelector(state => state.user[0])
 
 
-  function verificaAutenticacao()
-  {
-    if(user.authenticated)
-    {
-      return (
-        <div className={!user.authenticated ? "displayNoneGeral" : ""} id="principalContent">
-          <Route exact path="/" component={Home} />
-          <Route path="/listarProdutos" component={ListProducts} />
-          <Route path="/cadastrarProduto" component={CadastrarProdutos} />
-          <Route path="/saidaDeProduto/:id" component={SaidaDeProduto} />
-          <Route path="/entradaDeProdutos" component={EntradaDeProduto} />
-          <Route path="/cadastrarFornecedor" component={CadastrarFornecedores} />
-          <Route path="/listarFornecedores" component={ListarFornecedores} />
-          <Route path="/lancamentoDeProdutosViaNota/:numeroNota/:quantidadeProdutos/:fornecedor" component={EntradaDeProdutosViaNota} />
-          <Route path="/cadastrarCliente" component={CadastroDeClientes} />
-          <Route path="/listarClientes" component={listarClientes} />
-          <Route path="/lancamentoPedido" component={AddNewOrder} />
-          <Route path="/listarVendedores" component={ListarVendedores} />
-          <Route path="/cadastrarVendedores" component={CadastrarVendedores} />
-          <Route path="/main/config/tabs" component={ListAllConfig} />
-          <Route exact path="/listarPedidos" component={ListarPedidos} />
-          <Route exact path="/listarPedidos/details/sale/:codesale" component={DetailsOrder} />
-        </div>
-      )
-    }else
-    {
-      return(
-        <div className={user.authenticated ? "displayNoneGeral" : ""} id="principalContent">
-          <Route exact path="/" component={Login} />
-        </div>
-      )
-     
-    }
-  }
-
-
-
   return (
-    <Router>
-        <Navbar/>
-        
-              {verificaAutenticacao()}
-       
+    <Router  basename="/">
+        <div id="principalContent">
+          <Route exact path="/controlpainel/login" component={login} />
+           {/* Div principal de navegação */}
+          <Route exact path="/" component={MultiCarouselPage}></Route>
+          <Route path="/page1" component={Products}></Route>
+          <Route path="/controlpainel" component={Home}></Route>
+          {/* PesquisaPorCategorias MenuPrincipal */}
+          <Route exact path="/listFor/Category/Acessorios/listAll" component={Acessorios}></Route>
+          <Route exact path="/listFor/Category/Roupas/listAll" component={Roupas}></Route>
+          <Route exact path="/listFor/Category/CuidadosComAPele/listAll" component={CuidadosComAPele}></Route>
+          <Route exact path="/listFor/Category/Maquiagens/listAll" component={Maquiagens}></Route>
+          {/* Pesquisa pelo Carousel de Produtos em Alta */}
+          <Route exact path="/listFor/HighProducts/forId/:id" component={HighProducts}></Route>
+        </div>
     </Router>
   );
 }

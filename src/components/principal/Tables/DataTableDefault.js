@@ -99,7 +99,7 @@ import { getAllSales } from '../../../store/fetchActions';
     const handleAction = value => {
 
       if(value.target.id !== ""){
-          window.location.href = "/listarPedidos/details/sale/" + value.target.id
+          window.location.href = "/controlpainel/admin/listarPedidos/details/sale/" + value.target.id
       }
 
     }

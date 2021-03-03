@@ -1,0 +1,23 @@
+.containerCategorias{
+    height: 180px;
+}
+
+.linhaCategorias img{
+    height: 180px;
+}
+
+.imgCategory{
+    height: 180px;
+}
+p {
+    margin-top: 2%;
+    color: black;
+}
+
+#sectionCategorias{
+    padding: 20px
+}
+
+h4{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

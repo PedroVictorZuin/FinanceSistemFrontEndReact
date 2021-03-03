@@ -1,0 +1,14 @@
+h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    font-weight: 300;
+}
+
+
+
+
+.linhaCarrousel{
+    display: flex;
+    padding : 25px;
+    margin-top: 2%;
+}

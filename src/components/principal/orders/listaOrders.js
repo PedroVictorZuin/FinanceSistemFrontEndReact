@@ -4,7 +4,7 @@ import {useDispatch , useSelector} from 'react-redux'
 import {updateListOrders} from '../../../store/ducks/sales'
 import { getAllSales } from '../../../store/fetchActions';
 import {QuantityProductsSale} from '../products/reports/ReportQuantityProductsSale.tsx'
-import {TableDefault} from "../Tables/DataTableDefault.tsx"
+import {TableDefault} from "../Tables/DataTableDefault"
 import orderscontroller from '../../../Controller/OrdersController'
 
 
@@ -33,12 +33,6 @@ export default ()=>{
     useEffect(()=>{
        dispatch(getAllSales())
     } , [])
-
-
-
-    orderscontroller.listProductsForTheOrders().then((response)=>{
-        console.log(response)
-    })
 
 
 

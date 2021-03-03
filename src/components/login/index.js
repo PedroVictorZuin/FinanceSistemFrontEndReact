@@ -43,12 +43,24 @@ export default ()=>{
                     else{
                         dispatch(changeAuthenticated(response.content))
                         Swal.close();
-                        Swal.fire({
-                            title : "Login Efetuado com Sucesso , Seja Bem Vindo " + response.content.user,
-                            icon : "success",
-                            timer : 2000,
-                            showConfirmButton : false,
-                        })
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                              toast.addEventListener('mouseenter', Swal.stopTimer)
+                              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            },
+                            didClose : ()=>{
+                                window.location.href = "/controlpainel/admin/"
+                            }
+                          })
+                          Toast.fire({
+                            icon: 'success',
+                            title: 'Login Verificado com Sucesso !'
+                          })
                         localStorage.setItem('user' , JSON.stringify(response.content))
                     }
                 })
@@ -59,53 +71,55 @@ export default ()=>{
 
 
 return(
-    <div id="containerLogin" className="container">
-        <form method="POST" onSubmit={realizarLogin}>
-            <div className="row backGrow">
-                <div className="col-md-3"></div>
-                <div className="col-md-6 mb-4">
-                    <h4 className="mb-4">Login</h4>
+    <>
+        <div id="containerLogin" className="container">
+            <form method="POST" onSubmit={realizarLogin}>
+                <div className="row backGrow">
+                    <div className="col-md-3"></div>
+                    <div className="col-md-6 mb-4">
+                        <h4 className="mb-4">Login</h4>
+                    </div>
+                    <div className="col-md-3"></div>
                 </div>
-                <div className="col-md-3"></div>
-            </div>
-            <div className="row">
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
-                    <label>Email</label>
-                    <input onChange={formChange} type="email" required name="email" className="form-control" placeholder="ex : fulano@fulano.com"></input>
+                <div className="row">
+                    <div className="col-md-3"></div>
+                    <div className="col-md-6">
+                        <label>Email</label>
+                        <input onChange={formChange} type="email" required name="email" className="form-control" placeholder="ex : fulano@fulano.com"></input>
+                    </div>
+                    <div className="col-md-3"></div>
                 </div>
-                <div className="col-md-3"></div>
-            </div>
-            <div className="row mb-4">
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
-                    <label>Senha</label>
-                    <input onChange={formChange} type="password" required name="password" className="form-control"></input>
+                <div className="row mb-4">
+                    <div className="col-md-3"></div>
+                    <div className="col-md-6">
+                        <label>Senha</label>
+                        <input onChange={formChange} type="password" required name="password" className="form-control"></input>
+                    </div>
+                    <div className="col-md-3"></div>
                 </div>
-                <div className="col-md-3"></div>
-            </div>
-            <div className="row mt-4 mb-4">
-                <div className="col-md-3"></div>
-                <div className="col-md-3">
-                    <button  className="btn btn-outline-danger">Voltar</button>
+                <div className="row mt-4 mb-4">
+                    <div className="col-md-3"></div>
+                    <div className="col-md-3">
+                        <button  className="btn btn-outline-danger">Voltar</button>
+                    </div>
+                    <div className="col-md-4">
+                        <button type="submit" className="btn btn-outline-success">Entrar</button>
+                    </div>
+                    <div className="col-md-2"></div>
                 </div>
-                <div className="col-md-4">
-                    <button type="submit" className="btn btn-outline-success">Login =></button>
+                <div className="row mt-4">
+                    <div className="col-md-3"></div>
+                    <div className="col-md-3">
+                        <a>Esqueceu a Senha ?</a>
+                    </div>
+                    <div className="col-md-4">
+                        <a >Cadastre-SE</a>
+                    </div>
+                    <div className="col-md-2"></div>
                 </div>
-                <div className="col-md-2"></div>
-            </div>
-            <div className="row mt-4">
-                <div className="col-md-3"></div>
-                <div className="col-md-3">
-                    <a>Esqueceu a Senha ?</a>
-                </div>
-                <div className="col-md-4">
-                    <a >Cadastre-SE</a>
-                </div>
-                <div className="col-md-2"></div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    </>
 )
 
 

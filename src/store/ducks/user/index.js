@@ -7,6 +7,7 @@ var INICIAL_STATE = [{
     nivel : loggedUser.nivel ? loggedUser.nivel : "" ,
     email : loggedUser.email ? loggedUser.email : "",
     authenticated : loggedUser.token ? true : false,
+    ecommerce : false
 }]
 export default function reducer(state = INICIAL_STATE, action)
 {

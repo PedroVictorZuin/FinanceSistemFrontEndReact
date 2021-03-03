@@ -5,13 +5,9 @@ import Swal from 'sweetalert2'
 import "./Products.css"
 //Bootstrap and jQuery libraries
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'jquery/dist/jquery.min.js';
 //Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
-
-import $ from 'jquery'
-
 
 export default class ListProduct extends Component{
 
@@ -164,7 +160,7 @@ export default class ListProduct extends Component{
                                             timer: 1500
                                           })
                                         var cont = 0
-                                        produtosState.map(index => {
+                                        produtosState.filter((index) => {
                                             if(index.idproduct === idProduct)
                                             {
                                                 let quantidadeTotal = Number(quantidadeProdutos + quantidadeDeItensEmEstoque)

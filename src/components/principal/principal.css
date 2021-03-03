@@ -70,6 +70,18 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.AlignItensCenterSide{
+    display:"flex";
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top: 1%;
+}
+.displayNoneGeral{
+    display:none;
+}
+
 #botaoFornecedores{
     background-image: url("../../images/service.png");
     width: 128px;
@@ -79,6 +91,13 @@
     padding: 10px;
     margin-right: auto;
     margin-left: auto;
+}
+.sidebarAligment{
+
+        max-width: 300px;
+        height: 906px;
+        max-height: 906px;
+
 }
 #botaoRelatorios{
     background-image: url("../../images/diagram.png");

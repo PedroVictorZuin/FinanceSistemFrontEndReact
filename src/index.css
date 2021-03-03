@@ -1,16 +1,25 @@
 #principalContent{
-    width: 98%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3%;
-    border-radius: 10px;
-    background-color: white;
-    padding: 80px;
-    border: 1px solid darkslategray;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+ 
 }
+
+
+#root{   
+    margin:0 auto; 
+    padding: 0;
+    background-color: #ffebee; 
+    background-image: url("./imgs/background.jpg");
+}
+body {
+    background-image: url("./imgs/background.jpg");
+}
+
+.ConteudoPrincipal{
+    background-color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
 
 
 

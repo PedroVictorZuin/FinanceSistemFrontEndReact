@@ -1,6 +1,12 @@
 .backGrow{
-    background-color:#FFFAFA;
+    background-color:transparent;
     padding: 10px;
     text-align: center;
     border-radius: 4px;
+}
+
+
+#containerLogin{
+    margin-top : 10%;
+    margin-bottom : 10%;
 }
