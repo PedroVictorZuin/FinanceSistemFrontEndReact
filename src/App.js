@@ -30,10 +30,7 @@ function App() {
           <Route path="/page1" component={Products}></Route>
           <Route path="/controlpainel" component={Home}></Route>
           {/* PesquisaPorCategorias MenuPrincipal */}
-          <Route exact path="/listFor/Category/Acessorios/listAll" component={Acessorios}></Route>
-          <Route exact path="/listFor/Category/Roupas/listAll" component={Roupas}></Route>
-          <Route exact path="/listFor/Category/CuidadosComAPele/listAll" component={CuidadosComAPele}></Route>
-          <Route exact path="/listFor/Category/Maquiagens/listAll" component={Maquiagens}></Route>
+          <Route exact path="/listFor/Category/:idcategory/listAll" component={Acessorios}></Route>
           {/* Pesquisa pelo Carousel de Produtos em Alta */}
           <Route exact path="/listFor/HighProducts/forId/:id" component={HighProducts}></Route>
         </div>

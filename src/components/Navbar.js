@@ -6,20 +6,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./indexComponents.css"
 import {useDispatch} from 'react-redux'
 import Swal from 'sweetalert2'
-import {changeAuthenticated} from '../store/ducks/user'
+import {changeAuthenticated} from '../store/ducks/user';
+import {PropagateLoader} from 'react-spinners';
 
 
 
 
 
-export default  function(props){
+export default function(props){
 
   
   const user = useSelector(state => state.user[0])
-  
-  
-
-
+  const modalSpinner = useSelector(store => store.spinnerModal.showModal)
 
     return(
         <div>
@@ -29,28 +27,11 @@ export default  function(props){
               <Nav className="mr-auto navbar-nav" style={{}}>
                     
               </Nav>
-              <Nav className={!user.authenticated ? "displayNoneGeral" : "navbar-nav"}>
-              <Link className="linkToButton" to="/main/config/tabs"></Link>
+              <Nav style={{marginLeft:"auto" , marginRight : "45%" , display:"flex" , justifyContent: "center" , alignItens : "center"}} className={!user.authenticated ? "displayNoneGeral" : "navbar-nav"}>
               
-              
-                <DropdownButton
-                  menuAlign="left"
-                  id="dropdown-menu-align-left"
-                  id="botaoConfiguracoes"
-                >
-                  <Dropdown.Item style={{display:"flex" , justifyContent: "center" , alignItens : "center" , textAlign : "center"}}>
-                    
-                  </Dropdown.Item>
-                  <Dropdown.Item  style={{textAlign:"center"}}>Editar Perfil</Dropdown.Item>
-                  <Dropdown.Item  style={{textAlign:"center"}}eventKey="3">Minhas Vendas</Dropdown.Item>
-                  <Dropdown.Item  style={{textAlign:"center"}}eventKey="4">Meus Produtos</Dropdown.Item>
-                  <Dropdown.Item  style={{textAlign:"center"}}eventKey="4">Configurações</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Link to="/" className=""><Dropdown.Item style={{textAlign:"center"}} eventKey="2">Sair</Dropdown.Item></Link>
-                </DropdownButton>
-                
-              
-
+              <div style={{width : "100%",display:"flex" , justifyContent: "center" , alignItems:"center"}}>
+                <PropagateLoader id="LoadingLoader" size="12" color="white" loading={modalSpinner}></PropagateLoader>
+              </div>
               </Nav>
           </Navbar>
         </div>

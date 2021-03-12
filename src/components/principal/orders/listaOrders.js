@@ -1,11 +1,12 @@
-import React , {useEffect} from 'react'
+import React , {useEffect , useState} from 'react'
 import {Table , Card , Accordion , Button,ListGroup} from 'react-bootstrap';
 import {useDispatch , useSelector} from 'react-redux'
 import {updateListOrders} from '../../../store/ducks/sales'
-import { getAllSales } from '../../../store/fetchActions';
-import {QuantityProductsSale} from '../products/reports/ReportQuantityProductsSale.tsx'
+import { getAllSales , getAllProductsMoreSale } from '../../../store/fetchActions';
+import {QuantityProductsSale} from '../products/reports/ReportQuantityProductsSale.jsx'
 import {TableDefault} from "../Tables/DataTableDefault"
-import orderscontroller from '../../../Controller/OrdersController'
+import orderscontroller from '../../../Controller/OrdersController';
+import {Spinner} from 'react-bootstrap'
 
 
 import "./style.css"
@@ -26,29 +27,39 @@ const retornoDeProdutos = (quantidadeProdutos)=>{
 
 export default ()=>{
 
+    const [isLoading , setIsLoading] = useState(true)
 
-    const orders = useSelector(store => store.orders)
     const dispatch = useDispatch()
-
+    
     useEffect(()=>{
-       dispatch(getAllSales())
+        dispatch(getAllSales())
+        dispatch(getAllProductsMoreSale())
     } , [])
+    
+    const orders = useSelector(store => store.orders)
 
 
 
-        return(
-            <div className="container-fluid" style={{alignItems : "left" , justifyContent: "left" , textAlign : "left"}}>
-                <h5>Pedidos</h5> 
-            <div className="container-fluid">
-                <div className="col-md-12" style={{display : "flex",justifyContent : "space-between"}}>
-                    <QuantityProductsSale/>
-                    <QuantityProductsSale/>
-                    <QuantityProductsSale/>
+        if(!orders.listOrders[0])
+        {
+            return <Spinner style={{display : isLoading ? "block" : "none" , marginBottom : "2%"}} animation="border"  />
+        }
+        else
+        {
+            return(
+                <div className="container-fluid" style={{alignItems : "left" , justifyContent: "left" , textAlign : "left"}}>
+                    <h5>Pedidos</h5> 
+                <div className="container-fluid">
+                    <div className="col-md-12" style={{display : "flex",justifyContent : "space-between"}}>
+                        <QuantityProductsSale products={orders.quantityProductsMoreOnSale}/>
+                        <QuantityProductsSale products={orders.quantityProductsMoreOnSale}/>
+                        <QuantityProductsSale products={orders.quantityProductsMoreOnSale}/>
+                    </div>
+                </div>
+                <div className="container-fluid">
+                    <TableDefault orders={orders.listOrders[0]}/>
                 </div>
             </div>
-            <div className="container-fluid">
-            <TableDefault/>
-            </div>
-        </div>
-        )
+            )
+        }
     }

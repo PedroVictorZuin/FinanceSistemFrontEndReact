@@ -8,6 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
+import {MDBDropdown,MDBDropdownToggle,MDBDropdownMenu,MDBDropdownItem} from 'mdbreact';
+import {FiMoreHorizontal} from 'react-icons/fi'
+import {GrConfigure} from 'react-icons/gr';
+import {Link} from 'react-router-dom';
+
+
 
 export default class ListProduct extends Component{
 
@@ -197,7 +203,7 @@ export default class ListProduct extends Component{
                         html:
                             "<div>"+
                                 "<div>"+
-                                    "<div class='row col-md-12'>" + 
+                                    "<div class='row col-md-12 mt-2'>" + 
                                         "<div class='col-md-2'>" + 
                                             '<label>Referência</label>' + 
                                             '<input id="referenciaProduto"  value='+index.reference+'  class="swal2-input">' +
@@ -223,28 +229,42 @@ export default class ListProduct extends Component{
                                             '<label>Preço de Compra</label>' + 
                                             '<input id="precoCompra"  value='+index.buyvalue+'  class="swal2-input">' + 
                                         "</div>" + 
-                                        "<div class='row col-md-12'>" + 
-                                        "<div class='col-md-2'>" + 
-                                            '<label>Preço de Venda</label>' + 
-                                            '<input id="precoVenda"  value='+index.sellvalue+'  class="swal2-input">' + 
-                                        "</div>" +
-                                        "<div class='col-md-2'>" + 
-                                            '<label>Quantidade em Estoque</label>' + 
-                                            '<input id="quantidadeProduto"  value='+index.quantity+'  class="swal2-input">' + 
-                                        "</div>" + 
-                                        "<div class='col-md-2'>" + 
+                                        "<div class='row col-md-12 mt-2'>" + 
+                                            "<div class='col-md-2'>" + 
+                                                '<label>Preço de Venda</label>' + 
+                                                '<input id="precoVenda"  value='+index.sellvalue+'  class="swal2-input">' + 
+                                            "</div>" +
+                                            "<div class='col-md-2'>" + 
                                                 '<label>Quantidade em Estoque</label>' + 
+                                                '<input id="quantidadeProduto"  value='+index.quantity+'  class="swal2-input">' + 
+                                            "</div>" + 
+                                            "<div class='col-md-2'>" + 
+                                                    '<label>Produto Ativo?</label>' + 
+                                                    '<select id="produtoAtivo"  value='+index.active+'  class="swal2-input">' + 
+                                                        "<option value='false'>Não</option>"+
+                                                        "<option value='true'>Sim</option>"+
+                                                    '</select>' + 
+                                            "</div>" + 
+                                            "<div class='col-md-4'>" + 
+                                                    '<label>Aparece na HOME do Ecommerce ? ( Produtos em Alta )</label>' + 
+                                                    '<select id="ecommerceHome"  value='+index.ecommerceHome+'  class="swal2-input">' + 
+                                                        "<option value='true'>Sim</option>"+
+                                                        "<option value='false'>Não</option>"+
+                                                    '</select>' + 
+                                            "</div>" + 
+                                            "<div class='col-md-2'>" + 
+                                                '<label>Fornecedor</label>' +
                                                 '<input id="fornecedorProduto"  value='+index.idprovider+'  class="swal2-input">' + 
                                             "</div>" + 
                                         '</div>'+
                                     '<hr>'+
                                 "</div>"+
-                                "<div class='col-md-12' style='background-color : lightgray;display: flex;justify-content:space-between;padding : 10px;border-radius : 10px'>"+
-                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem1'>Enviar arquivo 1</label><input name='imagem1' id='imagem1' type='file' /><img  width='120px'  height='120px' src="+index.image1+"><input type='hidden' value="+index.image1+"  id='image1'></img></div>"+
-                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem2'>Enviar arquivo 2</label><input name='imagem2' id='imagem2' type='file' /><img  width='120px'  height='120px' src="+index.image2+"> <input type='hidden' value="+index.image2+" id='image2'> </img></div>"+
-                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem3'>Enviar arquivo 3</label><input name='imagem3' id='imagem3' type='file' /><img  width='120px'  height='120px' src="+index.image3+"> <input type='hidden' value="+index.image3+" id='image3'> </img></div>"+
-                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem4'>Enviar arquivo 4</label><input name='imagem4' id='imagem4' type='file' /><img  width='120px'  height='120px' src="+index.image4+"> <input type='hidden' value="+index.image4+" id='image4'> </img></div>"+
-                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem5'>Enviar arquivo 5</label><input name='imagem5' id='imagem5' type='file' /><img  width='120px'  height='120px' src="+index.image5+"> <input type='hidden' value="+index.image5+" id='image5'> </img></div>"+
+                                "<div class='col-md-12 mt-4' style='background-color : lightgray;display: flex;justify-content:space-between;padding : 10px;border-radius : 10px'>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem1'>Enviar arquivo 1</label><input name='imagem1' id='imagem1' style='display:none' type='file' /><img  width='120px'  height='120px' src="+index.image1+"><input  class='hidden' type='hidden' value="+index.image1+"  id='image1'></img></div>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem2'>Enviar arquivo 2</label><input name='imagem2' id='imagem2' style='display:none' type='file' /><img  width='120px'  height='120px' src="+index.image2+"> <input class='hidden' type='hidden' value="+index.image2+" id='image2'> </img></div>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem3'>Enviar arquivo 3</label><input name='imagem3' id='imagem3' style='display:none' type='file' /><img  width='120px'  height='120px' src="+index.image3+"> <input class='hidden' type='hidden' value="+index.image3+" id='image3'> </img></div>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem4'>Enviar arquivo 4</label><input name='imagem4' id='imagem4' style='display:none' type='file' /><img  width='120px'  height='120px' src="+index.image4+"> <input class='hidden' type='hidden' value="+index.image4+" id='image4'> </img></div>"+
+                                        "<div class='col-md-2' style='align-itens : center;justify-content : center ; width: 190px ; padding : 10px ' ><label style='width:100%' class='labelimage' for='imagem5'>Enviar arquivo 5</label><input name='imagem5' id='imagem5' style='display:none' type='file' /><img  width='120px'  height='120px' src="+index.image5+"> <input class='hidden' type='hidden' value="+index.image5+" id='image5'> </img></div>"+
                                 "</div>"+
                             "</div>",
                         focusConfirm: false,
@@ -273,6 +293,8 @@ export default class ListProduct extends Component{
                                         image3 : document.getElementById('image3').value,
                                         image4 : document.getElementById('image4').value,
                                         image5 : document.getElementById('image5').value,
+                                        active : document.getElementById('produtoAtivo').value,
+                                        ecommerceHome : document.getElementById('ecommerceHome').value,
                                     }
 
                                     this.product.UpdateProduct(product).then(res => {
@@ -322,7 +344,14 @@ render(){
     return(
         <div>
             <div className="titlePageListProducts">
-                <h4>Listagem de Produtos</h4>
+                <div className="col-md-12">
+                    <h4>Listagem de Produtos</h4>
+                </div>
+                <div className="col-md-12">
+                    <div style={{marginLeft:"auto"}} className="col-md-4">
+                        <Button size="sm" variant="dark"><Link style={{color : "white"}} to="/admin/cadastrarProduto">Cadastrar Novo Produto </Link></Button>
+                    </div>
+                </div>
             </div>
             <div>
                 <Table id="tabelaProdutos" bordered hover size="sm">
@@ -337,6 +366,8 @@ render(){
                             <th>Preço de Compra</th>
                             <th>Preço de Venda</th>
                             <th>Quantidade</th>
+                            <th>Ativo?</th>
+                            <th>Produto em Alta?</th>
                             <th>Painel de Controle</th>
 
                         </tr>
@@ -352,7 +383,7 @@ render(){
                                 {
                                     return (
                                         <tr key={index.reference}>
-                                            <td><img src={index.image1} width="166px" height="74px" style={{borderRadius : "5px"}} alt={"Image Product"}></img></td>
+                                            <td><img src={index.image1} width="74px" height="74px" style={{borderRadius : "5px"}} alt={"Image Product"}></img></td>
                                             <td>{index.reference}</td>
                                             <td>{index.name}</td>
                                             <td>{index.color}</td>
@@ -361,9 +392,20 @@ render(){
                                             <td>{buyvalue.toLocaleString('pt-br' , {minimumFractionDigits : 2})}</td>
                                             <td>{sellvalue.toLocaleString('pt-br' , {minimumFractionDigits : 2})}</td>
                                             <td>{index.quantity}</td>
-                                            <td><Button onClick={()=>{this.painelDeControle(index.idproduct , "entrada")}} variant="outline-dark botaoTabela">Entrada</Button>
-                                            <Button onClick={()=>{this.painelDeControle(index.idproduct , "saida")}} variant="outline-dark botaoTabela">Saida</Button>
-                                            <Button onClick={()=>{this.painelDeControle(index.idproduct , "editar")}} variant="outline-dark botaoTabela">Editar</Button></td>
+                                            <td>{index.active === "true" ? "Sim" : "Não"}</td>
+                                            <td>{index.ecommerceHome === "true" ? "Sim" : "Não"}</td>
+                                            <td>
+                                            <MDBDropdown size="md">
+                                                <MDBDropdownToggle color="outline-dark">
+                                                    <GrConfigure/>
+                                                </MDBDropdownToggle>
+                                                <MDBDropdownMenu>
+                                                    <MDBDropdownItem onClick={()=>{this.painelDeControle(index.idproduct , "entrada")}} >Entrada de Produto</MDBDropdownItem>
+                                                    <MDBDropdownItem onClick={()=>{this.painelDeControle(index.idproduct , "saida")}}>Saida de Produto</MDBDropdownItem>
+                                                    <MDBDropdownItem onClick={()=>{this.painelDeControle(index.idproduct , "editar")}}>Editar</MDBDropdownItem>
+                                                </MDBDropdownMenu>
+                                            </MDBDropdown>
+                                            </td>
                                         </tr>
                                     )
                                 }

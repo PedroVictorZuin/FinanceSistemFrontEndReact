@@ -169,7 +169,7 @@ export default class AddNewOrder extends React.Component{
                                 timer : 2000,
                                 showConfirmButton : false,
                                 onClose : ()=>{
-                                    window.location.href = "/"
+                                    window.location.href = "/controlpainel/admin"
                                 }
                             })
                         }

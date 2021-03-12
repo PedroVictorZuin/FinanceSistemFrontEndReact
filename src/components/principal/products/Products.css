@@ -30,7 +30,7 @@
 }
 
 input[type="file"] {
-    display: none;
+    display: block;
 }
 .labelimage{
     padding: 20px 10px;
@@ -55,6 +55,7 @@ input[type="file"] {
       z-index:1;
       cursor:pointer
 }
+
 .message {
       border:2px solid #ccc;
       background:#fff;

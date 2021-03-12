@@ -82,6 +82,50 @@
     display:none;
 }
 
+.message {
+    border:2px solid #ccc;
+    background:#fff;
+    padding:10px;
+    font-family:'Open Sans';
+    width:250px;
+    float:left;
+    margin:4px;
+    overflow:hidden;
+    color: #333
+}
+.botao {
+    border:1px solid lightblue;
+    background: lightblue;
+    color:#ffffff;
+    font-family:'Open Sans';
+    font-size:15px;
+    font-weight:bold;
+    padding:12px 28px;
+    margin:4px 8px;
+}
+
+input[type="file"] {
+    display: block;
+}
+
+.uploadChange {
+    position:absolute;
+    top:2px;
+    left:0;
+    opacity:0.01;
+    border:none;
+    width:200px;
+    padding:10px;
+    z-index:1;
+    cursor:pointer
+}
+
+
+
+#screensOfFuncional{
+    
+}
+
 #botaoFornecedores{
     background-image: url("../../images/service.png");
     width: 128px;
@@ -92,12 +136,12 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+
+
 .sidebarAligment{
-
-        max-width: 300px;
-        height: 906px;
-        max-height: 906px;
-
+        height: 68em;
+        max-height: 1000px;
 }
 #botaoRelatorios{
     background-image: url("../../images/diagram.png");

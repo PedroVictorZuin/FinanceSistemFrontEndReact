@@ -8,6 +8,8 @@
     padding: 0;
     background-color: #ffebee; 
     background-image: url("./imgs/background.jpg");
+    width: 100%;
+    height: 100%;
 }
 body {
     background-image: url("./imgs/background.jpg");
@@ -18,10 +20,6 @@ body {
     padding-top: 15px;
     padding-bottom: 15px;
 }
-
-
-
-
 
 #containerLogin{
     background-color: #FFF5EE;

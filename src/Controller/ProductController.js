@@ -1,4 +1,12 @@
 import Enviroments from '../enviroments/enviroment-homolg'
+import axios from 'axios';
+
+
+const api = axios.create({
+    baseURL : 'http://192.168.1.170:8081/'
+})
+
+
 
 export default class Product {
 
@@ -18,17 +26,12 @@ export default class Product {
 
 
     async PostProductImage(image){
-        console.log(image)
-        return fetch('https://api.imgur.com/3/image' , {
-            method : "POST",
-            headers : {
-                "Content-Type" : "application/json",
-                "Authorization" : "Client-ID cb9373707eac26e"
-            },
-            body : image
-        })
-        .then(res => res.json())
-        .catch(err => console.log(err))
+        let file = image;
+        const data = new FormData();
+
+        data.append('file' , file)
+        return api.post('admin/cadastroProduto/addProduct/addImage' , data)
+        .then(res => res)
     }
 
     async ListProductForId(idProduct){
@@ -42,14 +45,12 @@ export default class Product {
         const product1 = {
             "product" : product
         }
-
-        
-
         return fetch(Enviroments.URL+'/admin/cadastroProduto/updateProduct',{
                 method:"POST",
                 headers : {
                     "Content-Type" : "application/json"
                 },
+                cors : true,
                 body : JSON.stringify(product1)
         })
         .then(res => {
@@ -57,6 +58,28 @@ export default class Product {
         })
         .catch(err =>{return err})
 
+    }
+
+
+    async searchAllProductsPaginated(pagina)
+    {
+
+        let pagination = {
+            page : pagina ,
+            limit : 12
+        }
+
+        console.log(pagination)
+        return fetch(Enviroments.URL+'/admin/listProductsForEcommerce' , {
+            method : "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(pagination),
+            cors : true
+        })
+        .then(res => res.json())
+        .catch(err=> err)
     }
     async EnterProductQuantity(idProduct , quantity , quantidadeDeItensEmEstoque)
     {
@@ -106,6 +129,8 @@ export default class Product {
                     "image3" : images.image3,
                     "image4" : images.image4,
                     "image5" : images.image5,
+                    "active" : newProduct.active,
+                    "ecommerceHome" : newProduct.ecommerceHome
                 } 
             }
         

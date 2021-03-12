@@ -49,7 +49,7 @@ export default class EntradaDeProduto extends React.Component {
                     timer : 1500,
                     showConfirmButton : false,
                     willClose : ()=>{
-                        window.location.href = "/listarProdutos"
+                        window.location.href = "/controlpainel/admin/listarProdutos"
                     }
                 })
             }
@@ -61,7 +61,7 @@ export default class EntradaDeProduto extends React.Component {
                     showConfirmButton:  false,
                     timer : 1500,
                     willClose : ()=>{
-                        window.location.href = "/listarProdutos"
+                        window.location.href = "/controlpainel/admin/listarProdutos"
                     }
                 })
             }
@@ -72,7 +72,7 @@ export default class EntradaDeProduto extends React.Component {
                 text : err,
                 icon : "error",
                 willClose : ()=>{
-                    window.location.href = "/listarProdutos"
+                    window.location.href = "/controlpainel/admin/listarProdutos"
                 }
             })
         })

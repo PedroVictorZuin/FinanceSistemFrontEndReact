@@ -29,6 +29,8 @@ export default class CadastrarProdutos extends Component{
                 buyvalue : 0,
                 sellvalue : 0,
                 idprovider : 0,
+                ecommerceHome : 'false',
+                active : 'false',
                 quantity : 0
             },
             images : {
@@ -70,6 +72,7 @@ export default class CadastrarProdutos extends Component{
                 Swal.showLoading()
                    Product.PostProductImage(event.target.files[0])
                    .then(data => {
+                        console.log(data.data)
                         if(event.target.id === "fotoProdutoCapa")
                         {
                             if(data.data.error)
@@ -88,18 +91,28 @@ export default class CadastrarProdutos extends Component{
                             }
                             else
                             {
-                                Swal.close()
-                                let state = this.state
-                                state.images.image1 = data.data.link
-                                this.setState(state)
-                                Swal.fire({
-                                    title : "Sucesso ! ",
-                                    icon : "success",
-                                    showConfirmButton : false,
-                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
-                                    timer : 1500
-                                })
-                                
+                                Swal.close();
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 500,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    },
+                                    didClose : ()=>{
+                                      
+                                        let state = this.state
+                                        state.images.image1 = data.data.url
+                                        this.setState(state)
+                                    }
+                                  })
+                                  Toast.fire({
+                                    icon: 'success',
+                                    title: 'Upload Realizado com Sucesso ! '
+                                  })
                             }
                         }
                         else if(event.target.id === "fotoProduto2")
@@ -120,17 +133,27 @@ export default class CadastrarProdutos extends Component{
                             }
                             else
                             {
-                                Swal.close()
-                                let state = this.state
-                                state.images.image2 = data.data.link
-                                this.setState(state)
-                                Swal.fire({
-                                    title : "Sucesso ! ",
-                                    icon : "success",
-                                    showConfirmButton : false,
-                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
-                                    timer : 1500
-                                })
+                                Swal.close();
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 500,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    },
+                                    didClose : ()=>{
+                                        let state = this.state
+                                        state.images.image2 = data.data.url
+                                        this.setState(state)
+                                    }
+                                  })
+                                  Toast.fire({
+                                    icon: 'success',
+                                    title: 'Upload Realizado com Sucesso ! '
+                                  })
                             }
                         }
                         else if(event.target.id === "fotoProduto3")
@@ -146,22 +169,32 @@ export default class CadastrarProdutos extends Component{
                                     icon : "error",
                                     showConfirmButton : false,
                                     html : "<p>Erro de Upload Tente Novamente mais tarde</p>",
-                                    timer : 1500
+                                    timer : 500
                                 })
                             }
                             else
                             {
-                                Swal.close()
-                                let state = this.state
-                                state.images.image3 = data.data.link
-                                this.setState(state)
-                                Swal.fire({
-                                    title : "Sucesso ! ",
-                                    icon : "success",
-                                    showConfirmButton : false,
-                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
-                                    timer : 1500
-                                })
+                                Swal.close();
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 500,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    },
+                                    didClose : ()=>{
+                                        let state = this.state
+                                        state.images.image3 = data.data.url
+                                        this.setState(state)
+                                    }
+                                  })
+                                  Toast.fire({
+                                    icon: 'success',
+                                    title: 'Upload Realizado com Sucesso ! '
+                                  })
                             }
                         }
                         else if(event.target.id === "fotoProduto4")
@@ -183,16 +216,26 @@ export default class CadastrarProdutos extends Component{
                             else
                             {
                                 Swal.close()
-                                let state = this.state
-                                state.images.image4 = data.data.link
-                                this.setState(state)
-                                Swal.fire({
-                                    title : "Sucesso ! ",
-                                    icon : "success",
-                                    showConfirmButton : false,
-                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
-                                    timer : 1500
-                                })
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 500,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    },
+                                    didClose : ()=>{
+                                        let state = this.state
+                                        state.images.image4 = data.data.url
+                                        this.setState(state)
+                                    }
+                                  })
+                                  Toast.fire({
+                                    icon: 'success',
+                                    title: 'Upload Realizado com Sucesso ! '
+                                  })
                                 
                             }
                         }
@@ -215,16 +258,26 @@ export default class CadastrarProdutos extends Component{
                             else
                             {
                                 Swal.close()
-                                let state = this.state
-                                state.images.image5 = data.data.link
-                                this.setState(state)
-                                Swal.fire({
-                                    title : "Sucesso ! ",
-                                    icon : "success",
-                                    showConfirmButton : false,
-                                    html : "<h5>Upload Realizado com Sucesso !</h5>",
-                                    timer : 1500
-                                })
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 500,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    },
+                                    didClose : ()=>{
+                                        let state = this.state
+                                        state.images.image5 = data.data.url
+                                        this.setState(state)
+                                    }
+                                  })
+                                  Toast.fire({
+                                    icon: 'success',
+                                    title: 'Upload Realizado com Sucesso ! '
+                                  })
                             }
 
                         }
@@ -255,6 +308,8 @@ export default class CadastrarProdutos extends Component{
         if(event.target.id === "formGroupSellValue"){products.sellvalue = event.target.value}
         if(event.target.id === "formProviderProduct"){products.idprovider = event.target.value}
         if(event.target.id === "formGroupQuantityValue"){products.quantity = event.target.value}
+        if(event.target.id === "formGroupActiveProduct"){products.active = event.target.value}
+        if(event.target.id === "formGroupHighProduct"){products.ecommerceHome = event.target.value}
 
         this.setState({newProduct : products})
       }
@@ -268,16 +323,25 @@ export default class CadastrarProdutos extends Component{
             .then(res => {
                 if(res.success)
                 {
-                    Swal.fire({
-                        title : "Sucesso : ",
-                        text : "Produto Cadastrado com Sucesso",
-                        icon: "success",
-                        showConfirmButton:  false,
-                        timer : 2000,
-                        willClose : ()=>{
-                            window.location.href = "/listarProdutos"
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-center',
+                        showConfirmButton: false,
+                        timer: 500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        },
+                        didClose : ()=>{
+                            window.location.href = "/controlpainel/admin/listarProdutos"
                         }
-                    })
+                      })
+                      Toast.fire({
+                        icon: 'success',
+                        title: 'Produto Cadastrado com Sucesso! Redirecionando...'
+                      })
                 }
             })
         }
@@ -299,6 +363,8 @@ export default class CadastrarProdutos extends Component{
         else if(newProduct.sellvalue === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Preço de Venda" , icon : "error"})
         else if(newProduct.idprovider === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Fornecedor" , icon : "error"})
         else if(newProduct.quantity === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Quantidade" , icon : "error"})
+        else if(newProduct.ecommerceHome === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Produto em Alta ?" , icon : "error"})
+        else if(newProduct.active === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Prrencha o campo Produto Ativo ?" , icon : "error"})
         else if(images.image1 === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Selecione a Imagem de Capa" , icon : "error"})
         else if(images.image2 === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Selecione a Imagem 2" , icon : "error"})
         else if(images.image3 === "")return Swal.fire({title : "Erro de Preenchimento" , text : "Selecione a Imagem 3" , icon : "error"})
@@ -311,6 +377,16 @@ export default class CadastrarProdutos extends Component{
         return(
             <div className="container-fluid">
                 <Form onSubmit={this.handleSubmit}>
+                    <div className="row col-md-12 caixadeBotoes">
+                        <div className="col-md-3">
+                        </div>
+                        <div className="col-md-3">
+                        </div>
+                        <div className="col-md-3">
+                            <Button size="md" className="btn btn-danger">Cancelar X</Button>
+                            <Button type="submit" size="md" className="btn btn-success">Cadastrar ✓</Button>
+                        </div>
+                    </div>
                     <div className="row col-md-12">
                         <div className="col-md-3">
                             <Form.Group controlId="formGroupnameProduct">
@@ -396,7 +472,7 @@ export default class CadastrarProdutos extends Component{
                                 <Form.Group className="alignCenter" controlId="formProviderProduct">
                                     <Form.Label>Fornecedor</Form.Label>
                                     <Form.Control value={this.state.newProduct.idprovider} onChange={this.handleChange}  as="select" defaultValue="Choose...">
-                                        <option>Selecione o Fornecedor de compra do produto/peça</option>
+                                        <option>Selecione o Fornecedor do produto/peça</option>
                                         {
                                             this.state.providers.map(index => {
                                                 return (
@@ -413,32 +489,29 @@ export default class CadastrarProdutos extends Component{
                                 <Form.Control value={this.state.newProduct.quantity} onChange={this.handleChange} type="number" placeholder="" />
                             </Form.Group>
                         </div>
+                        <div className="col-md-3">
+                            <Form.Group controlId="formGroupActiveProduct">
+                                <Form.Label>Produto Ativo?</Form.Label>
+                                <Form.Control value={this.state.newProduct.active} onChange={this.handleChange} as="select" custom>
+                                    <option value="true" >Sim</option>
+                                    <option value="false">Não</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </div>
+                        <div className="col-md-3">
+                            <Form.Group controlId="formGroupHighProduct">
+                                <Form.Label>Produto em Alta ?</Form.Label>
+                                <Form.Control value={this.state.newProduct.ecommerceHome} onChange={this.handleChange} as="select" custom>
+                                    <option value="true" >Sim</option>
+                                    <option value="false">Não</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </div>
                     </div>
                     <div className="row col-md-12" style={{padding : "20px" , border : "solid 1px lightgray" , borderRadius : "5px" , display:"flex" , justifyContent:"space-between"}}>
-                    {/* <Form.Group>
-                        <Form.File id="imagem1Produto" onChange={this.handleImageChange} label="1" />
-                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.File id="imagem2Produto" onChange={this.handleImageChange} label="2" />
-                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.File id="imagem3Produto" onChange={this.handleImageChange} label="3" />
-                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.File id="imagem4Produto" onChange={this.handleImageChange} label="4" />
-                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.File id="imagem5Produto" onChange={this.handleImageChange} label="5" />
-                        <img width="200px" height="200px" src="https://i.imgur.com//pu1YkGx.jpg"></img>
-                    </Form.Group> */}
                         <div className="multiple_upload">
-                            <input type="file" onChange={this.handleImageChange} id="fotoProdutoCapa"  className="uploadChange" />
-                            <div className="message"><span>Selecionar Foto da Capa</span></div>
+                            <input type="file" name="fotoProdutoCapa" onChange={this.handleImageChange} id="fotoProdutoCapa"  className="uploadChange" />
+                            <div className="message"><span for="fotoProdutoCapa">Selecionar Foto da Capa</span></div>
                             <input type="button" className="botao" value="Upload" />
                             <div className="lista">
                                 <img src={this.state.images.image1} alt="ImagemProduto1" width="290px" height="250px"></img>
@@ -479,17 +552,6 @@ export default class CadastrarProdutos extends Component{
                             </div>
                         </div>
 
-                    </div>
-                    <div className="row col-md-12 caixadeBotoes">
-                        <div className="col-md-3">
-                            <Button type="submit" size="lg" className="btn btn-success">Cadastrar ✓</Button>
-                        </div>
-                        <div className="col-md-3">
-                            <Button size="lg" className="btn btn-danger">Cancelar X</Button>
-                        </div>
-                        <div className="col-md-3">
-                            <Button size="lg" className="btn btn-warning">Limpar</Button>
-                        </div>
                     </div>
                 </Form>
             </div>

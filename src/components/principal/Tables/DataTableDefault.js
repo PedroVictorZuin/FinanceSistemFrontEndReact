@@ -6,14 +6,9 @@ import { getAllSales } from '../../../store/fetchActions';
 
 
 
-  export const TableDefault = () => {
-    const dispatch = useDispatch()
+  export const TableDefault = (props) => {
 
-    useEffect(()=>{
-       dispatch(getAllSales())
-    } , [])
-    const orders = useSelector(store => store.orders)
-
+    const orders = props.orders
     const tableDefaultTest = ({ filterText, onFilter, onClear }) => (
         <>
           <input id="search" type="text" className="form-control" placeholder="Filter By Name" aria-label="Search Input" value={filterText} onChange={onFilter} />
@@ -105,7 +100,7 @@ import { getAllSales } from '../../../store/fetchActions';
     }
     const [filterText, setFilterText] = React.useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
-    const filteredItems = orders.filter(item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const filteredItems = orders ? orders.filter(item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) : []
   
     const subHeaderComponentMemo = React.useMemo(() => {
       const handleClear = () => {

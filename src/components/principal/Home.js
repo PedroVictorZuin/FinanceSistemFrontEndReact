@@ -23,12 +23,17 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import Swal from 'sweetalert2'
 import {FiBox , FiUsers,FiArrowLeft} from 'react-icons/fi'
 import {IoCashOutline} from 'react-icons/io5'
+import {IoMdHome} from 'react-icons/io'
 import {FaCashRegister,FaShoppingBasket , FaChartLine , FaMedal} from 'react-icons/fa'
 import login from "../login";
 import {Figure} from "react-bootstrap";
 import {useSelector , useDispatch} from 'react-redux';
 import {changeAuthenticated} from '../../store/ducks/user';
-
+import {PropagateLoader} from 'react-spinners'
+import {changeViewModal} from '../../store/ducks/loadingSpinner'
+import {CadastrarCategorias} from '../principal/category/AddCategory'
+import {ListarCategorias} from '../principal/category/ListCategories'
+import {EditCategory} from '../principal/category/EditCategory'
 
 
 export default function Home(){
@@ -51,6 +56,10 @@ export default function Home(){
           authenticated : false,
       }
     
+
+
+
+
     
         localStorage.setItem('user' , JSON.stringify(loggout))
         dispatch(changeAuthenticated(loggout))
@@ -59,8 +68,9 @@ export default function Home(){
       }
 
 
-
-
+    function showHideLoading(){
+        dispatch(changeViewModal({showModal : true}))
+    }
     function entradaViaNota()
 {
     
@@ -89,17 +99,15 @@ export default function Home(){
             timer : 1500,
             icon : "success",
             willClose : ()=>{
-                window.location.href="controlpainel/admin/lancamentoDeProdutosViaNota/" + result.value[0] +"/" + result.value[1] +"/" + result.value[2]
+                window.location.href="/controlpainel/admin/lancamentoDeProdutosViaNota/" + result.value[0] +"/" + result.value[1] +"/" + result.value[2]
             },
             showConfirmButton : false
           })
         }
       })
-
-
-
-
 }
+
+
 
 if(user[0].authenticated){
     return(
@@ -117,13 +125,13 @@ if(user[0].authenticated){
                                                     src="https:image.flaticon.com/icons/png/512/147/147144.png"
                                                 />
                                                 <Figure.Caption>
-                                                    Pedro Zuin - <strong>Vendedor Nível 1</strong>
+                                                    {user[0].user} - <strong>Vendedor Nível {user[0].exp}</strong>
                                                 </Figure.Caption>
                                             </Figure>
                                     </SidebarHeader>
                                     <SidebarContent>
                                     <Menu iconShape="circle">
-                                        <MenuItem>Dashboard</MenuItem>
+                                        <MenuItem icon={<IoMdHome/>}>Dashboard</MenuItem>
                                         <SubMenu icon={<FiBox/>}  title="Produtos">
                                             <MenuItem className="TESTEDECLASSE"><Link className="linkToButton" to="/admin/cadastrarProduto">Cadastrar Produtos</Link></MenuItem>
                                             <MenuItem className="TESTEDECLASSE"><Link className="linkToButton" to="/admin/entradaDeProdutos">Entrada em Produtos</Link></MenuItem>
@@ -168,11 +176,13 @@ if(user[0].authenticated){
                                 </SidebarFooter>
                             </ProSidebar>
                                 </div>
-                                <div style={{marginLeft: "auto" , marginRight: "auto" , width : '100%' , backgroundColor: "white" , padding : "5px"}}>
+                                <div style={{marginLeft: "auto" , marginRight: "auto" , width : '100%' , height : "auto" , backgroundColor: "white" , padding : "5px"}}>
                                     <Switch>
                                         <Route exact path="/admin/listarProdutos" component={ListProducts} />
                                         <Route exact path="/admin/cadastrarProduto" component={CadastrarProdutos} />
                                         <Route exact path="/admin/saidaDeProduto/:id" component={SaidaDeProduto} />
+                                        <Route exact path="/admin/listarCategorias" component={ListarCategorias} />
+                                        <Route exact path="/admin/cadastrarCategorias" component={CadastrarCategorias} />
                                         <Route exact path="/admin/entradaDeProdutos" component={EntradaDeProduto} />
                                         <Route exact path="/admin/cadastrarFornecedor" component={CadastrarFornecedores} />
                                         <Route exact path="/admin/listarFornecedores" component={ListarFornecedores} />
@@ -185,10 +195,10 @@ if(user[0].authenticated){
                                         <Route exact path="/admin/main/config/tabs" component={ListAllConfig} />
                                         <Route exact path="/admin/listarPedidos" component={ListarPedidos} />
                                         <Route exact path="/admin/listarPedidos/details/sale/:codesale" component={DetailsOrder} />
+                                        <Route exact path="/admin/listarCategorias/details/category/:idcategory" component={EditCategory} />
                                     </Switch>
                                 </div>
                             </div>
-                      
         </BrowserRouter>
     )
 }
@@ -196,7 +206,7 @@ else{
     return(
         <>
         <Switch>
-            <Route exact path="/admin/login" component={login} />
+            
         </Switch>
         <login></login>
         </>
