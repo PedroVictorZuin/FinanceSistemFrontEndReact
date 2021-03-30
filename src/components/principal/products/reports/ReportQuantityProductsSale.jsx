@@ -61,7 +61,7 @@ export const QuantityProductsSale = (props : any)=>{
 
     if(chartData.labels != undefined )
     {
-        if(chartData. != 0)
+        if(chartData.length != 0)
         {
             return (
                 <div style={{width : "35%" , height : "35%"}}>

@@ -8,8 +8,18 @@ import {useDispatch} from 'react-redux'
 import Swal from 'sweetalert2'
 import {changeAuthenticated} from '../store/ducks/user';
 import {PropagateLoader} from 'react-spinners';
+import { MdStoreMallDirectory } from "react-icons/md";
+import {MDBIcon} from 'mdbreact';
 
 
+import {
+  MDBNavbarNav,
+  MDBNavItem,
+  MDBBtn
+}
+from 'mdbreact'
+
+const redirectToEcommerce = () => window.location.href="/"
 
 
 
@@ -27,11 +37,16 @@ export default function(props){
               <Nav className="mr-auto navbar-nav" style={{}}>
                     
               </Nav>
-              <Nav style={{marginLeft:"auto" , marginRight : "45%" , display:"flex" , justifyContent: "center" , alignItens : "center"}} className={!user.authenticated ? "displayNoneGeral" : "navbar-nav"}>
+              <Nav style={{marginLeft:"auto"  , display:"flex" , justifyContent: "center" , alignItens : "center"}} className={!user.authenticated ? "displayNoneGeral" : "navbar-nav"}>
               
               <div style={{width : "100%",display:"flex" , justifyContent: "center" , alignItems:"center"}}>
                 <PropagateLoader id="LoadingLoader" size="12" color="white" loading={modalSpinner}></PropagateLoader>
               </div>
+              <MDBNavbarNav className="ml-auto mr-0" right>
+                <MDBNavItem>
+                <MDBBtn onClick={redirectToEcommerce} color="elegant"><MDBIcon size="lg" icon="store" /></MDBBtn>
+                </MDBNavItem>
+              </MDBNavbarNav>
               </Nav>
           </Navbar>
         </div>

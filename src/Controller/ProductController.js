@@ -61,15 +61,14 @@ export default class Product {
     }
 
 
-    async searchAllProductsPaginated(pagina)
+    async searchAllProductsPaginated(pagina ,categoria)
     {
-
         let pagination = {
             page : pagina ,
-            limit : 12
+            limit : 12,
+            idcategory : Number(categoria)
         }
 
-        console.log(pagination)
         return fetch(Enviroments.URL+'/admin/listProductsForEcommerce' , {
             method : "POST",
             headers: {

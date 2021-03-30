@@ -1,0 +1,19 @@
+.mdb-datatable-entries{
+    display:none;
+}
+
+input[type=search]
+{
+    
+}
+
+
+.imagViewCart:hover{
+    transition: all 0.4s;
+    width: 100px;
+    height: 80px;
+}
+
+.imagViewCart{
+    transition: all 0.4s;
+}

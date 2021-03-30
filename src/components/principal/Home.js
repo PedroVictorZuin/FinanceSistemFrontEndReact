@@ -25,7 +25,6 @@ import {FiBox , FiUsers,FiArrowLeft} from 'react-icons/fi'
 import {IoCashOutline} from 'react-icons/io5'
 import {IoMdHome} from 'react-icons/io'
 import {FaCashRegister,FaShoppingBasket , FaChartLine , FaMedal} from 'react-icons/fa'
-import login from "../login";
 import {Figure} from "react-bootstrap";
 import {useSelector , useDispatch} from 'react-redux';
 import {changeAuthenticated} from '../../store/ducks/user';
@@ -208,7 +207,6 @@ else{
         <Switch>
             
         </Switch>
-        <login></login>
         </>
     )
 }

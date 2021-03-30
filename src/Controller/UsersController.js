@@ -1,21 +1,18 @@
 import enviroments from '../enviroments/enviroment-homolg'
+import axios from 'axios';
+
 export default class {
-
     realizeLoginWithAuthentication(user){
-
-
         if(!user.email){
             return
         }
-        if(!user.password){
+        if(!user.pass){
             return
         }
-
         let userCerto = {
             "user" : user
         }
-
-        return fetch(enviroments.URL + '/public/authenticate' , {
+        return fetch(enviroments.URL + '/public/authenticate/user' , {
             method : "POST",
             headers : {
                 "Content-Type" : "application/json"
@@ -23,7 +20,7 @@ export default class {
             body : JSON.stringify(userCerto)
         })
         .then(response => response.json())
-        .catch(err => err.json())
+        .catch(err => err)
     }
 
 

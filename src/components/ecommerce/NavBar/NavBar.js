@@ -1,17 +1,27 @@
 import React from 'react';
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBIcon,MDBDropdown, MDBDropdownToggle,MDBDropdownMenu,MDBDropdownItem, MDBContainer } from 'mdbreact';
+import { MDBNavbar,MDBBtn , MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler,MDBBadge, MDBCollapse, MDBNavItem, MDBNavLink, MDBIcon,MDBDropdown, MDBDropdownToggle,MDBDropdownMenu,MDBDropdownItem, MDBContainer } from 'mdbreact';
 import "./navbar.css"
 import {Link , BrowserRouter as Router , Route} from 'react-router-dom';
+import {ShowModal} from '../../Modals/index.jsx'
+import ModalPage from '../../Modals/TesteModal'
 
 
 
 class NonFixedNavbarExample extends React.Component {
   constructor(props) {
     super(props);
+    this.handleShowShoppingCart = this.handleShowShoppingCart.bind(this);
+    this.closeModalShoppingCart = this.closeModalShoppingCart.bind(this);
+    this.handleLoginModal = this.handleLoginModal.bind(this);
+    this.closeModalLogin = this.closeModalLogin.bind(this);
+
+
     this.state = {
       collapse: false,
       authenticated : this.props.authenticated,
-      user : this.props.user
+      user : this.props.user,
+      showShoppingCart : false,
+      showLoginModal : false,
     };
     this.onClick = this.onClick.bind(this);
   }
@@ -21,6 +31,27 @@ class NonFixedNavbarExample extends React.Component {
       collapse: !this.state.collapse,
     });
   }
+
+
+  handleShowShoppingCart()
+  {
+    this.setState({showShoppingCart : this.state.showShoppingCart ? false : true})
+  }
+  handleLoginModal()
+  {
+    console.log(this.state)
+    this.setState({showLoginModal : this.state.showLoginModal ? false : true})
+  }
+  closeModalShoppingCart()
+  {
+    this.setState({showShoppingCart : false})
+  }
+  closeModalLogin()
+  {
+    this.setState({showLoginModal : false})
+  }
+
+
 
   render() {
 
@@ -60,15 +91,16 @@ class NonFixedNavbarExample extends React.Component {
                           </MDBNavItem>
                         ) : (
                           <MDBNavItem>
-                            <MDBNavLink to="/controlpainel/login/" className="botaoNavBar mr-3 ml-3 mt-2">Login</MDBNavLink>
+                            <MDBBtn color="dark" onClick={this.handleLoginModal} className="mr-3 ml-3 mt-2">Login</MDBBtn>
                           </MDBNavItem>
                         )
                       }
                       
                     </MDBNavItem>
                     <MDBNavItem>
-                    <MDBNavLink className="waves-effect mt-2 align-items-center" to="#!">
+                    <MDBNavLink onClick={this.handleShowShoppingCart} className="waves-effect mt-2 align-items-center" to="#!">
                         <MDBIcon className="botaoNavBar w-20" icon="shopping-cart" />
+                        <MDBBadge color="primary" className="ml-2">9</MDBBadge>
                     </MDBNavLink>
                     </MDBNavItem>
                     {
@@ -92,6 +124,9 @@ class NonFixedNavbarExample extends React.Component {
               </MDBCollapse>
             </MDBNavbar>
           </header>
+          <ShowModal  show={this.state.showShoppingCart} closeModal={this.closeModalShoppingCart} whatModal={"ShoppingCartModal"}/>
+          <ShowModal  show={this.state.showLoginModal} closeModal={this.closeModalLogin} whatModal={"loginModal"}/>
+
       </div>
     );
   }
