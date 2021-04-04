@@ -8,7 +8,8 @@ const CarouselPage = (props) => {
 
     console.log(props.products)
 
-
+if(props.products.length != 0)
+{
   return (
     <MDBContainer className="shadow-box-example z-depth-1" fluid style={{ borderRadius :"5px",backgroundColor: "#FFF", padding : "25px"}}>
         <MDBRow fluid style={{backgroundColor: "#eceff1", borderRadius: "10px"}}>
@@ -29,6 +30,7 @@ const CarouselPage = (props) => {
           <MDBCarouselItem  style={{display:"flex"}} itemId="1">
             <MDBView className="linhaCarrousel">
                 {
+                  
                     props.products.map(index => {
                       if(index.active === "true" && index.ecommerceHome === "true")
                       {
@@ -69,6 +71,12 @@ const CarouselPage = (props) => {
       </MDBCarousel>
     </MDBContainer>
   );
+}
+else
+{
+  return(<h5>Carregando</h5>)
+}
+ 
 }
 
 export default CarouselPage;

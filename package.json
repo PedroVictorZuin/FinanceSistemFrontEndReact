@@ -2,6 +2,12 @@
   "name": "financesistemfrontendreact",
   "version": "0.1.0",
   "private": true,
+  "bin" : "src/index.js",
+  "pkg" : {
+    "targets" : [
+      "node12"
+    ]   
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
     "@material-ui/core": "^4.11.3",
@@ -23,6 +29,7 @@
     "react-data-table-component": "^6.11.7",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
+    "react-input-mask": "^2.0.4",
     "react-minimal-side-navigation": "^1.8.0",
     "react-pro-sidebar": "^0.6.0",
     "react-redux": "^7.2.2",
@@ -33,7 +40,6 @@
     "redux": "^4.0.5",
     "styled-components": "^5.2.1",
     "sweetalert2": "^10.10.4",
-    "typescript": "^4.2.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

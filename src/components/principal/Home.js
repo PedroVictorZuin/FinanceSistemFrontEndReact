@@ -14,7 +14,7 @@ import AddNewOrder from "./orders/addNewOrder"
 import CadastrarVendedores from "./saleman/cadastrarVendedores"
 import ListarVendedores from "./saleman/listarVendedores"
 import ListarPedidos from "./orders/listaOrders"
-import ListAllConfig from "./config"    
+// import ListAllConfig from "./config"    
 import DetailsOrder from "./orders/detalhesDoPedido";
 import {BrowserRouter , Route , Switch , Link} from 'react-router-dom'
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
@@ -124,7 +124,20 @@ if(user[0].authenticated){
                                                     src="https:image.flaticon.com/icons/png/512/147/147144.png"
                                                 />
                                                 <Figure.Caption>
-                                                    {user[0].user} - <strong>Vendedor Nível {user[0].exp}</strong>
+                                                    {
+                                                    console.log(user),
+                                                    user[0].name + " " +
+                                                     user[0].lastname} - <strong>
+                                                         {
+                                                         (user[0].perfil === 1 ? "Administrador - Nível `$user[0].exp`" : "" )
+                                                          ||
+                                                         (user[0].perfil === 2 ? "Vendedor - Nível `$user[0].exp`" : "" )
+                                                          ||
+                                                         (user[0].perfil === 3 ? "Cliente - Nível `$user[0].exp`" : "" )
+                                                          ||
+                                                         (user[0].perfil === 4 ? "Moderador - Nível `$user[0].exp`" : "" )
+                                                         }
+                                                    </strong>
                                                 </Figure.Caption>
                                             </Figure>
                                     </SidebarHeader>
@@ -191,7 +204,7 @@ if(user[0].authenticated){
                                         <Route exact path="/admin/lancamentoPedido" component={AddNewOrder} />
                                         <Route exact path="/admin/listarVendedores" component={ListarVendedores} />
                                         <Route exact path="/admin/cadastrarVendedores" component={CadastrarVendedores} />
-                                        <Route exact path="/admin/main/config/tabs" component={ListAllConfig} />
+                                        {/* <Route exact path="/admin/main/config/tabs" component={ListAllConfig} /> */}
                                         <Route exact path="/admin/listarPedidos" component={ListarPedidos} />
                                         <Route exact path="/admin/listarPedidos/details/sale/:codesale" component={DetailsOrder} />
                                         <Route exact path="/admin/listarCategorias/details/category/:idcategory" component={EditCategory} />

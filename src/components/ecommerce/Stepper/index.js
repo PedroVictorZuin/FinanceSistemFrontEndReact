@@ -6,6 +6,7 @@ import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {StepOne} from '../Order/index'
+import {PaymantMethod} from './PaymantData'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,7 @@ function getStepContent(step) {
     case 0:
       return <StepOne/>
     case 1:
-      return 'Passo 2 : Escolha a forma de pagamento';
+      return <PaymantMethod/>;
     case 2:
       return 'Passo 3 : Realizar Pagamento';
     default:

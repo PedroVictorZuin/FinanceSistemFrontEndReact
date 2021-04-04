@@ -138,41 +138,24 @@ const advanceChangeCurrentPage = (event)=>{
             <ShowModal product={product} show={showAddProductSuccessModal} whatModal={"AddProductSuccess"}/>
             <Navbar  authenticated={user.authenticated} user={user} />
             <div style={{backgroundColor : "white",marginTop: "5%",border : "1px solid lightgray" ,borderRadius : '10px', display: "flex" , padding : "25px" , width : "90%" , marginLeft : "auto" , marginRight : "auto"}}>
-            <div className="container-fluid" style={{borderRadius : "10px" ,width : "20%"}} header='Animated'>
             <Spinner style={{display : isLoading ? "block" : "none" , marginBottom : "2%"}} animation="border"  />
-                    
-                    <div className='col-md-3'>
-                    <MDBTreeview header='Pesquisa/Categorias/Acessorios' className='w-20'>
-                        <MDBTreeviewList icon='gem' title='Bijuterias' far open>
-                        <MDBTreeviewItem icon='gem' title='Pulseiras' far />
-                        <MDBTreeviewItem icon='gem' title='Brincos' far />
-                        <MDBTreeviewList icon='gem' title='Colares' far open>
-                            <MDBTreeviewItem icon='gem' title='Colares de Concha' far />
-                            <MDBTreeviewItem icon='gem' title='Colares de Pedras' opened />
-                            <MDBTreeviewItem icon='gem' title='Correntes Banhado a Prata' opened />
-                            <MDBTreeviewItem icon='gem' title='Correntes Banhado a Ouro' opened />
-                        </MDBTreeviewList>
-                        </MDBTreeviewList>
-                            <MDBTreeviewList title='Material Legitimo' icon="gem" far>
-                            <MDBTreeviewItem icon='gem' title='Pulseiras' far />
-                            <MDBTreeviewItem icon='gem' title='Brincos' far />
-                            <MDBTreeviewList icon='gem' title='Colares' far open>
-                                <MDBTreeviewItem icon='gem' title='Colares de Concha' far />
-                                <MDBTreeviewItem icon='gem' title='Colares de Pedras'  />
-                                <MDBTreeviewItem icon='gem' title='Correntes Banhado a Prata'  />
-                                <MDBTreeviewItem icon='gem' title='Correntes Banhado a Ouro'  />
-                            </MDBTreeviewList>
-                        </MDBTreeviewList>
-                        <MDBInput label="Pesquisar por Nome" /> 
-                        <MDBBtn color="elegant"><MDBIcon icon="search" size="md" /></MDBBtn>
-                        <MDBBtn color="elegant"><MDBIcon far icon="window-close" /></MDBBtn>
-                    </MDBTreeview>
-                    </div>
-                </div>
                 <div className="container-fluid">
+                    <div className="row col-md-12" style={{height : '15%' ,background : "#FFFAF0" , padding : "10px" , borderRadius : "10px"}}>
+                        <div className="col-md-4">
+                            <MDBInput label="Pesquisar por Nome/Categoria" /> 
+                        </div>
+                        <div className="col-md-4">
+                            <MDBInput label="Pesquisar por Nome/Categoria" /> 
+                        </div>
+                        <div className="col-md-4">
+                            <MDBInput label="Pesquisar por Nome/Categoria" /> 
+                        </div>
+                    </div>
                     <div className="row col-md-12">
-                        <div className="col-md-3"></div>
-                        <div className="col-md-6">
+                        <div className="col-md-3">
+                            
+                        </div>
+                        <div className="col-md-6 mt-3">
                                 <MDBPagination style={{textAlign: "center", display: "flex", justifyContent: "space-between" , backgroundColor : "#F5F5F5" , color:"gray"}} color="dark">
                                 <MDBPageItem onClick={backChangeCurrentPage} disabled={pages.previous.page ? false : true}>
                                     <MDBPageNav aria-label="Previous">
@@ -186,7 +169,9 @@ const advanceChangeCurrentPage = (event)=>{
                                 </MDBPageItem>
                                 </MDBPagination>
                         </div>
-                        <div className="col-md-3"></div>
+                        <div className="col-md-3" style={{display : "flex"}}>
+                            
+                        </div>
                     </div>
                     <div className="row col-md-12" style={{marginTop : "2%" , display : "flex"}}>
                             {products.map(index => {

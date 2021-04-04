@@ -50,6 +50,7 @@ const loginUser = (event)=>{
                         })
                 }
                 else{
+                    console.log(response.content)
                     dispatch(changeAuthenticated(response.content))
                     Swal.close();
                     const Toast = Swal.mixin({
@@ -81,6 +82,19 @@ const loginUser = (event)=>{
 
 
   const finishimSale = (listProducts)=>{
+
+
+    let FinalizatingSale = {
+      products : JSON.stringify(listProducts),
+      totalValueProducts : 0
+    }
+
+    listProducts.map(index => {
+      FinalizatingSale.totalValueProducts += parseFloat(index.sellvalue)
+    })
+
+
+
     let timerInterval
       Swal.fire({
         title: 'Processando Compra ! ',
@@ -88,7 +102,7 @@ const loginUser = (event)=>{
         timer: 3000,
         timerProgressBar: true,
         didOpen: () => {
-          localStorage.setItem("finalizatingSale" , JSON.stringify(listProducts))
+          localStorage.setItem("finalizatingSale" , JSON.stringify(FinalizatingSale))
           Swal.showLoading()
           timerInterval = setInterval(() => {
             const content = Swal.getContent()
