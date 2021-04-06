@@ -11,6 +11,7 @@ import categorycontroller from '../../../Controller/CategoryController'
 import productscontroller from '../../../Controller/ProductController'
 import Swal from 'sweetalert2';
 import {Modal} from 'react-bootstrap';
+import {ShowModal} from '../../Modals/index'
 
 
 const CategoryController = new categorycontroller();
@@ -25,6 +26,7 @@ const EcommercePage = () => {
   const [allHighProducts , setAllHighProducts] = useState()
   const [isLoading , setIsLoading] = useState(true)
   const [error , setError] = useState({haveError : false , errorDescription : ""})
+
 
 
   useEffect(() => {
@@ -81,6 +83,8 @@ const EcommercePage = () => {
 
   if(!isLoading && !error.haveError)
   {
+
+
     return (
       <div style={{backgroundColor: "#FFF" , height :"100%"}}>
         <section className="text-center rowPainelPrincipal ml-auto mr-auto">

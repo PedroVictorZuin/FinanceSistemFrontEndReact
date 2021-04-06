@@ -1,3 +1,37 @@
 .modal-full-heigh{
     max-width: 700px;
 }
+
+.opaccityHover{
+    opacity: 0.9;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 5px;
+}
+
+.opaccityHover:hover{
+    opacity: 1;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.big:hover{
+    opacity: 1;
+    cursor: pointer;
+    width: 408px;
+    height: 408px;
+    transition: all 0.3s;
+}
+
+
+
+
+
+.textBlack{
+    color:"black";
+}
+
+.spanHighFont{
+    font-size: 16px;
+    font-weight: 900;
+}

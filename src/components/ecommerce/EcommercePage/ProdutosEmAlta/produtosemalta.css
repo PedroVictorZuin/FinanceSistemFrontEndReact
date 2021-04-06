@@ -10,5 +10,15 @@ h4 {
 .linhaCarrousel{
     display: flex;
     padding : 25px;
-    margin-top: 2%;
+    justify-content: space-between;
+}
+
+
+.hoverImage{
+    transition: linear 0.2s;
+}
+
+.hoverImage:hover{
+    height: 233px;
+    transition: linear 0.2s;
 }

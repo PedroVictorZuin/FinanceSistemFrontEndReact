@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { MDBContainer, MDBBtn, MDBModal, MDBRow,MDBCol,MDBIcon,MDBModalBody, MDBModalHeader,MDBInput,ModalFooter, MDBModalFooter } from 'mdbreact';
+import { MDBContainer, MDBBtn, MDBModal, MDBRow,MDBCol,MDBIcon,MDBModalBody, MDBModalHeader,MDBInput,ModalFooter, MDBModalFooter} from 'mdbreact';
 import { IoMdClose } from "react-icons/io";
 import { BiCheck } from "react-icons/bi";
 import { RiShoppingCart2Fill } from "react-icons/ri";
@@ -16,11 +16,21 @@ import { changeAuthenticated } from '../../store/ducks/user';
 
 const UserController = new usercontroller()
 
-export const ShowModal = ({ product , whatModal , show , closeModal})=>{
-  
+export const ShowModal = ({ selectedProduct,product , whatModal , show , closeModal})=>{
   const dispatch = useDispatch()
   const [totalValueProducts , setTotalValueProduts] = useState(0)
   const [modalNumber , setModalNumber] = useState(FaBullseye)
+  const [modalProduct , setModalProduct] = useState(false)
+
+
+  const isEmpty = (obj)=>{
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return true;
+}
 
 
 const loginUser = (event)=>{
@@ -152,23 +162,8 @@ const somaTodosItens = ()=>{
 
 
 
-  if(whatModal === "ProductModal")
-    {
-      return(
-          <MDBModal isOpen={show} size="lg">
-            <MDBModalHeader>Modal de Produto</MDBModalHeader>
-            <MDBModalBody>
-              TESTE DE MODAL
-            </MDBModalBody>
-            <MDBModalFooter>
-              <MDBBtn color="secondary">Fechar <IoMdClose/></MDBBtn>
-              <MDBBtn color="primary">Add Carrinho</MDBBtn>
-            </MDBModalFooter>
-          </MDBModal>
-      )
-    }
-    else if(whatModal === "AddProductSuccess")
-    {
+  if(whatModal === "AddProductSuccess")
+  {
         if(product)
         {
 
@@ -198,8 +193,7 @@ const somaTodosItens = ()=>{
         else{
           return(<h5>Carregando...</h5>)
         }
-        
-    }
+      }
     else if(whatModal === "ShoppingCartModal")
     {
       const somaDosItens = somaTodosItens()
@@ -260,3 +254,198 @@ const somaTodosItens = ()=>{
       );
     }
 }
+
+
+
+export const ShowProductDetails = React.memo(({product , show , closeModal})=>
+  {
+    const [principalImageModal , setPrincipalImageModal] = useState('')
+
+    console.log(principalImageModal)
+    const setPrincipalImageModalChange = (eve)=>{
+      setPrincipalImageModal(eve.target.attributes.src.value)
+    }
+
+    const [addProduct , setAddProduct] = useState({
+      product : product,
+      totalValue : 0,
+      quantityItens : 1,
+    })
+
+    const [sended , setSended] = useState(false)
+
+
+
+    const addProductOnCart = (product)=>{
+        setSended(true)
+        console.log(product)
+        const Toast = Swal.mixin({
+          toast: false,
+          position: 'center',
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+          },
+          didClose: ()=>{closeModal()}
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: product.name + ' Adicionado com Sucesso !',
+          html : "<br />"+
+                "<div style='background-color : whitesmoke; border : 1px solid gray ; border-radius : 10px ; padding : 10px ' class='col-md-12'>"+
+                  "<div>"+
+                    `<img width="50px" height="50px" src="${product.image1}" />`+
+                  "</div>"+
+                  "<div>"+
+                    `<span>Nome : ${product.name} </span>`+
+                  "</div>"+
+                  "<div>"+
+                    `<span>Quantidade Adicionada : ${product.quantity} </span>`+
+                  "</div>"+
+                "</div>"
+        })
+    }
+
+
+    useEffect(()=>{
+      setAddProduct({
+        totalValue : 0,
+        quantityItens : 1
+      })
+      recalculateQTD(false)
+    } , [sended])
+
+
+    const recalculateQTD = (ev)=>{
+      let QuantidadeDeProdutos = 0 
+        if(ev)
+        {
+            QuantidadeDeProdutos = parseInt(ev.target.value)
+        }
+        else
+        {
+            QuantidadeDeProdutos = 1
+        }
+        const valorTotal = parseFloat(product.sellvalue)
+        const valorTotalAtualizado = valorTotal * QuantidadeDeProdutos
+        let newProductQuantity = product
+        newProductQuantity.quantity = QuantidadeDeProdutos
+        setAddProduct({
+          product : newProductQuantity,
+          totalValue : valorTotalAtualizado,
+          quantityItens : QuantidadeDeProdutos,
+          
+        })
+    }
+
+    
+
+
+    if((principalImageModal === "" && product.image1) ||
+       (principalImageModal !== "" &&
+        principalImageModal != product.image1 &&
+        principalImageModal != product.image2 &&
+         principalImageModal != product.image3 &&
+          principalImageModal !=  product.image4 &&
+           principalImageModal != product.image5))
+    {
+      setPrincipalImageModal(product.image1)
+      recalculateQTD(false)
+    }
+
+
+
+    if(product.image1)
+    {
+      // setPrincipalImageModal(product.image1)
+      return (
+        <MDBModal isOpen={show} size="fluid" toggle={closeModal} centered>
+          <MDBModalHeader toggle={closeModal} >Produto : {product.name} - {product.reference}</MDBModalHeader>
+          <MDBModalBody>
+            <div className="row col-md-12" style={{padding:"10px"}}>
+              <div className="col-md-6" style={{padding:"10px" , border :"1px solid lightgray" , borderRadius : "5px" , display:"flex" , justifyContent:"center" , alignItens: "center"}}>
+                    <img width="402" className="opaccityHover big" height="400" src={principalImageModal}/>
+                  <ul>
+                    <li><img onClick={setPrincipalImageModalChange} className="opaccityHover" width="80" height="80" src={product.image1}/></li>
+                    <li><img onClick={setPrincipalImageModalChange} className="opaccityHover" width="80" height="80" src={product.image2}/></li>
+                    <li><img onClick={setPrincipalImageModalChange} className="opaccityHover" width="80" height="80" src={product.image3}/></li>
+                    <li><img onClick={setPrincipalImageModalChange} className="opaccityHover" width="80" height="80" src={product.image4}/></li>
+                    <li><img onClick={setPrincipalImageModalChange} className="opaccityHover" width="80" height="80" src={product.image5}/></li>
+                  </ul>
+              </div>
+              <div className="col-md-6" style={{padding:"10px" , border :"1px solid lightgray" , borderRadius : "10px"}}>
+                <div className="mt-2">
+                  <h5>Detalhes do Produto</h5>
+                </div>
+                <div className="mt-4">
+                  <ul>
+                    <li><strong style={{color :"black"}}>Nome: {product.name}</strong></li>
+                    <li><strong style={{color :"black"}}>Valor Unitario: $ {parseFloat(product.sellvalue).toLocaleString('pt-br' , {minimumFractionDigits : 2})}</strong></li>
+                    <li><strong style={{color :"black"}}>Descrição: {product.description}</strong></li>
+                  </ul>
+                </div>
+                <hr></hr>
+                <div className="mt-2">
+                  <div className="row col-md-12" style={{display:"flex" , justifyContent : "center" , textAlign:"center"}}>
+                    <h5>Modelos/Preferências</h5>
+                  </div>
+                  <div className="row col-md-12 mt-4">
+                    <div className="col-md-4">
+                      <label>Quantidade</label>
+                      <input type="number" min="1" max="10" className="form-control" onChange={recalculateQTD} defaultValue={addProduct.quantityItens}></input>
+                    </div>
+                    <div className="col-md-4">
+                      <label>Cor</label>
+                      <select className="browser-default custom-select">
+                        <option value={"default"}>Cor</option>
+                        <option value={"black"}>Preto</option>
+                        <option value={"gray"}>Cinza</option>
+                        <option value={"green"}>Verde</option>
+                      </select>
+                    </div>
+                    <div className="col-md-4">
+                      <label>Tamanho</label>
+                      <select className="browser-default custom-select">
+                        <option value={"default"}>44</option>
+                        <option value={"black"}>45</option>
+                        <option value={"gray"}>46</option>
+                        <option value={"green"}>47</option>
+                      </select>
+                    </div>
+                    
+                  </div>
+                  <hr></hr>
+                  <div className="row col-md-12 mt-4" style={{display:"flex" , justifyContent : "center" , textAlign:"center"}}>
+                    <h5>O que Irá para o Carrino ?</h5>
+                    <div className="col-md-12" style={{border : "1px solid black" , borderRadius : "5px" , padding : "10px"}}>
+                        <div>
+                          <span className="spanHighFont">Valor Total : {parseFloat(addProduct.totalValue).toLocaleString('pt-br' , {minimumFractionDigits : 2})}</span>
+                        </div>
+                        <div>
+                          <span className="spanHighFont">Quantidade de Produtos : {addProduct.quantityItens}</span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row col-md-12">
+            <h5 style={{marginLeft : "80%"}}>Valor Total : R$ {parseFloat(addProduct.totalValue).toLocaleString('pt-br' , {minimumFractionDigits : 2})}</h5>
+            </div>
+          </MDBModalBody>
+          <MDBModalFooter>
+            <MDBBtn color="secondary" onClick={closeModal}>Fechar</MDBBtn>
+            <MDBBtn onClick={()=>addProductOnCart(product)} color="primary">Add Produto's <MDBIcon size="lg" icon="cart-plus" /> ({addProduct.quantityItens})</MDBBtn>
+          </MDBModalFooter>
+        </MDBModal>
+      )
+    }
+    else{
+      return(
+        ""
+      )
+    }
+  }
+)
