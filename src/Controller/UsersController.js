@@ -24,6 +24,42 @@ export default class {
     }
 
 
+    registerNerUser(user)
+    {
+        if(!user.email){
+            return
+        }
+        else if(!user.pass){
+            return
+        }
+        else if(!user.confirmpass){
+            return
+        }
+        else if(!user.name){
+            return
+        }
+        else if(!user.lastname){
+            return
+        }
+        else
+        {
+
+            const newUser = {
+                "user" : user
+            }
+
+            return fetch(enviroments.URL + "/public/register/newUser",{
+                method : "post",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                cors : true,
+                body : JSON.stringify(newUser)
+            })
+            
+        }
+    }
+
 
 
 }

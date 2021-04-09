@@ -9,10 +9,12 @@ import "./Carousel.css"
 
 const CarouselPage = () => {
   return (
-    <MDBContainer style={{width : "102%" , marginLeft : "-1%"}} className="carousselContainer mb-1" fluid>
+    <MDBContainer style={{padding:0 , marginTop:"5.5%" , overflowX:"auto"}} fluid>
       <MDBCarousel
+      style={{borderRadius:"10px"}}
         activeItem={1}
         length={3}
+        fluid
         showControls={true}
         showIndicators={true}
         className="z-depth-1"
@@ -21,35 +23,34 @@ const CarouselPage = () => {
           <MDBCarouselItem itemId="1">
             <MDBView>
               <img
-                className="d-block w-100 img-fluig"
+                className="d-block w-100 img-fluid"
                 src={mrsgringaPecasEmAlta}
                 alt="Peças em Alta"
-                style={{height : "auto" , width:"auto" , maxHeight: "200px" , marginRight : "auto" , marginLeft : "auto"}}
               />
             </MDBView>
           </MDBCarouselItem>
           <MDBCarouselItem itemId="2">
             <MDBView>
               <img
-                className="d-block w-100 img-fluig"
+                className="d-block w-100 img-fluid"
                 src={mrsgringaLancamentos}
                 alt="Lançamentos"
-                style={{height : "auto" , width:"auto" , maxHeight: "200px"  , marginRight : "auto" , marginLeft : "auto"}}
               />
             </MDBView>
           </MDBCarouselItem>
           <MDBCarouselItem itemId="3">
             <MDBView>
               <img
-                className="d-block w-100 img-fluig"
+                className="d-block w-100 img-fluid"
                 src={mrsgringaPromocoes}
                 alt="Promoções"
-                style={{height : "auto" , width:"auto" , maxHeight: "200px" , marginRight : "auto" , marginLeft : "auto"}}
               />
             </MDBView>
           </MDBCarouselItem>
         </MDBCarouselInner>
+        
       </MDBCarousel>
+      
     </MDBContainer>
   );
 }

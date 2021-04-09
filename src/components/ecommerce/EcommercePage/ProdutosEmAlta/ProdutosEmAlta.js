@@ -27,41 +27,40 @@ if(props.products.length != 0)
   return (
     <>
       <ShowProductDetails product={productChoice} show={showModalProduct} closeModal={closeModalProduct}/>
-      <MDBContainer className="shadow-box-example z-depth-1" fluid style={{ borderRadius :"5px",backgroundColor: "#FFF", padding : "25px"}}>
-          <MDBRow fluid style={{backgroundColor: "#eceff1", borderRadius: "10px"}}>
+      <MDBContainer className="shadow-box-example z-depth-1" fluid style={{ borderRadius :"5px",backgroundColor: "#FFF", padding : "25px",maxHeight: "380px"}}>
+          <MDBRow fluid style={{borderRadius: "10px"}}>
               <MDBCol>
-                  <h4 className="text-left">
+                  <h4 style={{textDecoration : "underline"}} className="text-center">
                       Produtos em Alta
                   </h4>
               </MDBCol>
           </MDBRow>
-              <MDBView className="linhaCarrousel">
+          <div  id="containerProdutosEmAlta" className="linhaCarrousel">
                   {
                       props.products.map(index => {
                         if(index.active === "true" && index.ecommerceHome === "true")
                         {
                             return (
                               <>
-                                    <Card style={{ width: '18rem' , height: '27rem' , borderRadius:"20px"}}>
-                                    <Card.Img width="40px" height="220px" variant="top" className="hoverImage" src={index.image1} />
-                                    <Card.Title >{index.name}</Card.Title>
-                                    <Card.Body style={{justifyContent :"center" ,paddingTop : "0px"}}>
-                                      <Card.Title style={{fontSize:"18px" , fontWeight : "900"}}>Por : R$ {parseFloat(index.sellvalue).toLocaleString("pt-br" , {minimumFractionDigits : 2})}</Card.Title>
-                                      <Card.Title style={{fontSize:"14px"}}>{index.description}</Card.Title>
-                                    </Card.Body>
-                                    <Card.Footer className="">
-                                      <div className="col-md-12" style={{display:'flex' , justifyContent:"space-between"}}>
-                                          <Button outline size="sm" style={{borderRadius: "10px"}} variant="dark"><MDBIcon size="2x" icon="cart-plus" /></Button>
-                                          <Button onClick={()=>showProductDetails(index)} outline size="sm" style={{borderRadius: "10px"}} variant="dark"><MDBIcon size="2x" far icon="eye" /></Button>
-                                      </div>
-                                    </Card.Footer>
-                                  </Card>
+                                    <Card style={{ width: '11rem' ,marginLeft:"2%",marginRight:"2%", height: '17rem' , minWidth:"11rem" , minHeight : "17rem"}}>
+                                      <Card.Img width="40px" height="130rem" variant="top" className="hoverImage" src={index.image1} />
+                                      <Card.Body style={{justifyContent :"center" ,paddingTop : "0px",maxWidth: '100%',padding:0,textAlign:"center"}}>
+                                        <Card.Title style={{fontSize:"16px" ,textAlign : "center", marginTop : "10%",marginLeft : "auto",marginRight : "auto" , fontWeight : "900",  marginBottom : "auto",width: '10rem'}} >{index.name}</Card.Title>
+                                        <Card.Title style={{fontSize:"14px" , fontWeight : "900"}}>Por : R$ {parseFloat(index.sellvalue).toLocaleString("pt-br" , {minimumFractionDigits : 2})}</Card.Title>
+                                      </Card.Body>
+                                      <Card.Footer style={{display:"flex" , marginTop : "10%",width: '10rem',justifyContent:"center"}} className="">
+                                        <div style={{display : 'flex',width: '10rem' , justifyContent : "space-between" }}>
+                                            <Button onClick={()=>showProductDetails(index)} outline size="sm" variant="dark"><MDBIcon size="2x" far icon="eye" /></Button>
+                                            <Button outline size="sm" variant="dark"><MDBIcon size="2x" icon="cart-plus" /></Button>
+                                        </div>
+                                      </Card.Footer>
+                                    </Card>
                               </>
                             )
                         }
                       })
                   }
-              </MDBView>
+          </div>
       </MDBContainer>
     </>
   );

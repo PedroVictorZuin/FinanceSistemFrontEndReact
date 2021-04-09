@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DataTableShoppingCart } from '../../principal/Tables/DataTableSoppingCart';
-import Navbar from '../NavBar/NavBar';
+import {NavBarEcommerce} from '../NavBar/NavBar';
 import HorizontalNonLinearAlternativeLabelStepper from '../Stepper'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -26,7 +26,7 @@ export default ()=>{
     {
         return(
             <div>
-                <Navbar authenticated={loggedUser ? loggedUser.authenticated : false} user={loggedUser} style={{marginBottom : "5%"}}></Navbar>
+                <NavBarEcommerce authenticated={loggedUser ? loggedUser.authenticated : false} user={loggedUser} style={{marginBottom : "5%"}}></NavBarEcommerce>
                 <div style={{background:"white"}} className="container-fluid mt-4">
                         <div className="row col-md-12 mt-4">
                             <div className="col-md-9 mt-4">

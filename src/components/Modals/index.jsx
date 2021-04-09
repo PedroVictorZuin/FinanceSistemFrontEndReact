@@ -449,3 +449,89 @@ export const ShowProductDetails = React.memo(({product , show , closeModal})=>
     }
   }
 )
+
+
+export const SignUpModal = ({toggle , show , closeModal})=>{
+ const [user , setUser] = useState({
+   name : '',
+   lastname : '',
+   email : "",
+   pass : "",
+   confirmpass : "",
+   avatar : "http://192.168.1.209:8081/files/b7ac46381f818afd6fddc5860de70e12%20-%20115-1150420_avatar-png-pic-male-avatar-icon-png.png"
+ })
+
+
+ const handleChangeUser = (ev)=>{
+    const nameField = ev.target.name
+    const valueField = ev.target.value
+
+    setUser({
+      ...user,
+      [nameField] : valueField
+    })
+ }
+
+  const cadastrarUsuario = (ev)=>{
+    ev.preventDefault();
+    UserController.registerNerUser(user)
+    .then(data => {
+      data.json()
+      .then(response => {
+        console.log(response)
+        if(response.success)
+        {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Usuario Cadastrado com Sucesso !',
+            showConfirmButton: false,
+            timer: 1500,
+            didClose : ()=>{
+            }
+          })
+        }
+        else if (!response.success && response.erro === 403)
+        {
+          Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: 'Erro ao Cadastrar Usuario',
+            text : "Email já existente em nossa base de Dados !",
+            showConfirmButton: false,
+            timer: 2500,
+            didClose : ()=>{
+            }
+          })
+        }
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
+
+  return (
+    <MDBContainer>
+      <MDBModal toggle={toggle} isOpen={show} >
+        <MDBModalHeader className="justify-content-center" titleClass="w-150 font-weight-bold" >
+          <h3>
+            Cadastre-se<MDBIcon icon="user-lock" />
+          </h3>
+          </MDBModalHeader>
+        <MDBModalBody>
+          <form onSubmit={cadastrarUsuario} className="mx-3 grey-text">
+            <MDBInput onChange={handleChangeUser} name="name" label="Nome" group type="text" defaultValue="Nome" validate error="wrong" success="right" />
+            <MDBInput onChange={handleChangeUser} name="lastname" label="Sobrenome" group type="text" defaultValue="Sobrenome" validate />
+            <MDBInput onChange={handleChangeUser} name="email" label="Email" group type="email" defaultValue="Email" validate />
+            <MDBInput onChange={handleChangeUser} name="pass" label="Senha" group type="password" defaultValue="Senha" validate />
+            <MDBInput onChange={handleChangeUser} name="confirmpass" label="Confirma Senha" group type="password" defaultValue="Confirma Senha" validate />
+            <MDBBtn onClick={closeModal} color="secondary">Fechar<IoMdClose/></MDBBtn>
+            <MDBBtn color="success" type="submit" >Cadastrar <MDBIcon icon="user-check" /></MDBBtn>
+          </form>
+        </MDBModalBody>
+        <MDBModalFooter className="justify-content-center">
+        </MDBModalFooter>
+      </MDBModal>
+    </MDBContainer>
+  );
+}

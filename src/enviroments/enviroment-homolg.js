@@ -1,5 +1,5 @@
 export default {
-    URL : "http://localhost:8081",
+    URL : "http://192.168.1.209:8081",
     USER : "admin",
     PASS :  "adm"
 }

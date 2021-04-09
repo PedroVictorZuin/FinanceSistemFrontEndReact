@@ -15,9 +15,30 @@ p {
 }
 
 #sectionCategorias{
-    padding: 20px
+    padding: 0px
 }
 
 h4{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+p{
+    font-size: 14px;
+    font-weight: 900;
+    color: darkslategray;
+}
+
+.displayFlexInlineList{
+    display: "flex";
+    justify-content: center;
+}
+
+.hovered:hover{
+    transition: all 0.3s;
+    border-radius: 10px;
+}
+.hovered{
+    transition: all 0.3s;
+    background-color: transparent;
+    color: ghostwhite;
 }

@@ -27,7 +27,7 @@ import {
     MDBPageNav,
   } from 'mdbreact';
 import Spinner from 'react-bootstrap/Spinner'
-import Navbar from '../../NavBar/NavBar';
+import {NavBarEcommerce} from '../../NavBar/NavBar';
 import "./Acessorios.css"
 import {useSelector, useDispatch} from 'react-redux';
 import {ShowModal} from '../../../Modals/index.jsx'
@@ -136,7 +136,7 @@ const advanceChangeCurrentPage = (event)=>{
     return (
         <>
             <ShowModal product={product} show={showAddProductSuccessModal} whatModal={"AddProductSuccess"}/>
-            <Navbar  authenticated={user.authenticated} user={user} />
+            <NavBarEcommerce  authenticated={user.authenticated} user={user} />
             <div style={{backgroundColor : "white",marginTop: "5%",border : "1px solid lightgray" ,borderRadius : '10px', display: "flex" , padding : "25px" , width : "90%" , marginLeft : "auto" , marginRight : "auto"}}>
             <Spinner style={{display : isLoading ? "block" : "none" , marginBottom : "2%"}} animation="border"  />
                 <div className="container-fluid">

@@ -1,135 +1,142 @@
-import React from 'react';
-import { MDBNavbar,MDBBtn , MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler,MDBBadge, MDBCollapse, MDBNavItem, MDBNavLink, MDBIcon,MDBDropdown, MDBDropdownToggle,MDBDropdownMenu,MDBDropdownItem, MDBContainer } from 'mdbreact';
-import "./navbar.css"
-import {Link , BrowserRouter as Router , Route} from 'react-router-dom';
-import {ShowModal} from '../../Modals/index.jsx'
-import ModalPage from '../../Modals/TesteModal'
+import React , {useState , useEffect} from 'react';
+import "./navbar.css";
+import {Navbar , Nav , Button , FormControl , Form , NavDropdown , Container} from 'react-bootstrap';
+import {MDBIcon , MDBDropdown , MDBDropdownItem , MDBDropdownToggle , MDBDropdownMenu} from 'mdbreact'
+import CarouselNavCenter from '../EcommercePage/NavCenter/NavCenter'
+import categorycontroller from '../../../Controller/CategoryController'
+import {ShowModal} from '../../Modals/index'
+import { useDispatch, useSelector } from 'react-redux';
+import {SignUpModal} from '../../Modals/index'
+import {changeAuthenticated} from '../../../store/ducks/user/index'
+import Swal from 'sweetalert2'
+
+
+const CategoryController = new categorycontroller();
 
 
 
-class NonFixedNavbarExample extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleShowShoppingCart = this.handleShowShoppingCart.bind(this);
-    this.closeModalShoppingCart = this.closeModalShoppingCart.bind(this);
-    this.handleLoginModal = this.handleLoginModal.bind(this);
-    this.closeModalLogin = this.closeModalLogin.bind(this);
+
+export const NavBarEcommerce = ({user , authenticated})=>{
+  const [visibleCategories ,setVisibleCategories] = useState(false)
+  const [allCategories , setAllCategories] = useState()
+  const [error , setError] = useState({haveError : false , errorDescription : ""})
+  const [showModalLogin , setShowModalLogin] = useState(false)
+  const [showModalCartShopp , setShowModalCartShopp] = useState(false)
+  const [showModalSignUp , setShowModalSignUp] = useState(false)
+  const dispatch = useDispatch()
 
 
-    this.state = {
-      collapse: false,
-      authenticated : this.props.authenticated,
-      user : this.props.user,
-      showShoppingCart : false,
-      showLoginModal : false,
-    };
-    this.onClick = this.onClick.bind(this);
+
+  const loggout = ()=>{
+  
+    const loggout = {
+      name : "",
+      lastname:"",
+      avatar : "",
+      nivel : "",
+      email : "",
+      authenticated : false,
   }
 
-  onClick() {
-    this.setState({
-      collapse: !this.state.collapse,
-    });
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Saida realizada com Sucesso',
+    showConfirmButton: false,
+    timer: 1500,
+    didClose: ()=>{
+      localStorage.setItem('user' , JSON.stringify(loggout))
+      dispatch(changeAuthenticated(loggout))
+      window.location.href="/"
+    }
+  })
+
   }
 
 
-  handleShowShoppingCart()
-  {
-    this.setState({showShoppingCart : this.state.showShoppingCart ? false : true})
-  }
-  handleLoginModal()
-  {
-    console.log(this.state)
-    this.setState({showLoginModal : this.state.showLoginModal ? false : true})
-  }
-  closeModalShoppingCart()
-  {
-    this.setState({showShoppingCart : false})
-  }
-  closeModalLogin()
-  {
-    this.setState({showLoginModal : false})
+  const showCategories = ()=>{
+    setVisibleCategories(!visibleCategories)
   }
 
-
-
-  render() {
-
-
-    return (
-      <div>
-          <header>
-            <MDBNavbar color="elegant-color-dark dark lighten-5" fixed="top" expand="md">
-                <MDBNavbarBrand className="botaoNavBarTitle"> 
-                  <Link className="Link" to="/">
-                    <strong>Mrs.Gringa</strong>
-                  </Link> 
-                </MDBNavbarBrand>
-              <MDBNavbarToggler onClick={this.onClick} />
-              <MDBCollapse isOpen={this.state.collapse} navbar>
-                <MDBNavbarNav right>
-                  <MDBNavItem>
-                    <MDBNavLink to="/" className="botaoNavBar mr-3 ml-3">Inicio</MDBNavLink>
-                  </MDBNavItem>
-                  <MDBNavItem>
-                    <MDBNavLink className="botaoNavBar mr-3 ml-3" to="#">Produtos</MDBNavLink>
-                  </MDBNavItem>
-                  <MDBNavItem>
-                    <MDBNavLink className="botaoNavBar mr-3 ml-3" to="#">Promoçoes</MDBNavLink>
-                  </MDBNavItem>
-                  <MDBNavItem>
-                    <MDBNavLink className="botaoNavBar mr-3 ml-3" to="#">Produtos em Alta</MDBNavLink>
-                  </MDBNavItem>
-                </MDBNavbarNav>
-                <MDBNavbarNav right>
-                    <MDBNavItem>
-
-                      {
-                        this.state.authenticated ? (
-                          <MDBNavItem>
-                            <MDBNavLink to="/controlpainel/admin/" className="botaoNavBar mr-3 ml-3 mt-2">Central do Vendedor</MDBNavLink>
-                          </MDBNavItem>
-                        ) : (
-                          <MDBNavItem>
-                            <MDBBtn color="dark" onClick={this.handleLoginModal} className="mr-3 ml-3 mt-2">Login</MDBBtn>
-                          </MDBNavItem>
-                        )
-                      }
-                      
-                    </MDBNavItem>
-                    <MDBNavItem>
-                    <MDBNavLink onClick={this.handleShowShoppingCart} className="waves-effect mt-2 align-items-center" to="#!">
-                        <MDBIcon className="botaoNavBar w-20" icon="shopping-cart" />
-                        <MDBBadge color="primary" className="ml-2">9</MDBBadge>
-                    </MDBNavLink>
-                    </MDBNavItem>
-                    {
-                      this.state.authenticated ? (
-                      <MDBNavItem>
-                        <MDBDropdown>
-                            <MDBDropdownToggle className="dopdown-toggle" nav>
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" className="rounded-circle z-depth-0"
-                                style={{ height: "35px", padding: 0 }} alt="" />
-                            </MDBDropdownToggle>
-                            <MDBDropdownMenu className="dropdown-default" right>
-                            <MDBDropdownItem href="#!">Minha Conta</MDBDropdownItem>
-                            <MDBDropdownItem href="#!">Minhas Compras</MDBDropdownItem>
-                            <MDBDropdownItem href="#!">Sair</MDBDropdownItem>
-                            </MDBDropdownMenu>
-                        </MDBDropdown>
-                      </MDBNavItem>
-                      ) : ""
-                    }
-                </MDBNavbarNav>
-              </MDBCollapse>
-            </MDBNavbar>
-          </header>
-          <ShowModal  show={this.state.showShoppingCart} closeModal={this.closeModalShoppingCart} whatModal={"ShoppingCartModal"}/>
-          <ShowModal  show={this.state.showLoginModal} closeModal={this.closeModalLogin} whatModal={"loginModal"}/>
-
-      </div>
-    );
+  const hideCategories = ()=>{
+    setVisibleCategories(false)
   }
+
+  useEffect(() => {
+    CategoryController.listAllCategories()
+    .then(response => {
+      setAllCategories(response)
+    })
+    .catch(err => setError({haveError : true , errorDescription : err}))
+  }, [])
+
+
+  const closeModalLogin = ()=>{
+      setShowModalLogin(false)
+  }
+  const closeModalShoppingCart = ()=>{
+      setShowModalCartShopp(false)
+  }
+
+  const showModalLoginFunc = ()=>{
+    setShowModalLogin(!showModalLogin)
+  }
+  const showModalShoppingCartFunc = ()=>{
+    setShowModalCartShopp(!showModalCartShopp)
+  }
+
+  const closeModalSignUp = ()=>{
+    setShowModalSignUp(false)
 }
 
-export default NonFixedNavbarExample;
+const showModalSignUpFunc = ()=>{
+  setShowModalSignUp(!showModalSignUp)
+}
+
+
+
+console.log(user)
+console.log(authenticated)
+
+
+  return(
+    <>
+    
+            <ShowModal show={showModalLogin} whatModal="loginModal" closeModal={closeModalLogin} />
+            {/* <ShowModal show={false} whatModal="showModalCartShopp" closeModal={closeModalShoppingCart} /> */}
+            <SignUpModal show={showModalSignUp} toggle={showModalSignUpFunc} closeModal={closeModalSignUp}/>
+            <Navbar fluid fixed="top" bg="dark" variant="dark">
+                <Navbar.Brand href="/">
+                <MDBIcon icon="shopping-bag" /> Mrs.Gringa 
+                </Navbar.Brand>
+                <Nav  className="mr-auto">
+                  <NavDropdown show={visibleCategories} onMouseEnter={showCategories} onMouseLeave={hideCategories} title="Categorias" id="dropdown-button-drop-left">
+                    <NavDropdown.Item  menuAlign={{ lg: 'left' }} style={{marginRight : "5%"}}  href="#action/3.1">
+                        <div style={{marginRight : "5%"}} className="">
+                          <h4>Categorias</h4>
+                          <CarouselNavCenter categories={allCategories ? allCategories : ""}/>
+                        </div>
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                  <Nav.Link href="#pricing">Pricing</Nav.Link>
+                </Nav>
+                <Nav  className="mr-left">
+                  <Nav.Link onClick={showModalShoppingCartFunc} style={{marginTop : "2%"}} ><MDBIcon icon="cart-arrow-down" size="lg" /></Nav.Link>
+                  <Nav.Link style={{marginTop : "2%", display : authenticated ? "block" : "none"}} href="/controlpainel">Central do Vendedor</Nav.Link>
+                  <Nav.Link style={{marginTop : "2%", display : authenticated ? "none" : "block"}} href="" onClick={showModalLoginFunc} >Login</Nav.Link>
+                  <Nav.Link style={{marginTop : "2%", display : authenticated ? "none" : "block"}} href="" onClick={showModalSignUpFunc} >Cadastre-se</Nav.Link>
+                  <MDBDropdown>
+                    <MDBDropdownToggle style={{ display : !authenticated ? "none" : "block"}} className="dopdown-toggle" nav>
+                      <img src={user.avatar} className="rounded-circle z-depth-0"
+                        style={{ height: "35px", padding: 0 }} alt="" />
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu className="dropdown-default" right>
+                      <MDBDropdownItem href="#!">Minha Conta</MDBDropdownItem>
+                      <MDBDropdownItem href="#" onClick={loggout}>Sair</MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+                </Nav>
+            </Navbar>
+            </>
+          )
+}

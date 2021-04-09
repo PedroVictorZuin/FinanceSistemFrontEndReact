@@ -9,16 +9,17 @@ h4 {
 
 .linhaCarrousel{
     display: flex;
-    padding : 25px;
+    padding : 10px;
     justify-content: space-between;
 }
-
-
+#containerProdutosEmAlta{
+    overflow-x: auto;
+}
 .hoverImage{
     transition: linear 0.2s;
 }
 
 .hoverImage:hover{
-    height: 233px;
+    height: 137px;
     transition: linear 0.2s;
 }

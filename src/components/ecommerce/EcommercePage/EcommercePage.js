@@ -5,14 +5,14 @@ import ProdutosEmAlta from "./ProdutosEmAlta/ProdutosEmAlta"
 import Promocoes from "./Promocoes/Promocoes"
 import Footer from '../Footer/Footer'
 import "./jumbotron.css"
-import Navbar from "../NavBar/NavBar";
+import {NavBarEcommerce} from "../NavBar/NavBar";
 import {useSelector} from 'react-redux';
 import categorycontroller from '../../../Controller/CategoryController'
 import productscontroller from '../../../Controller/ProductController'
 import Swal from 'sweetalert2';
 import {Modal} from 'react-bootstrap';
 import {ShowModal} from '../../Modals/index'
-
+// import {SideNav} from '../EcommercePage/SideNav'
 
 const CategoryController = new categorycontroller();
 const ProductsController = new productscontroller();
@@ -83,14 +83,11 @@ const EcommercePage = () => {
 
   if(!isLoading && !error.haveError)
   {
-
-
     return (
       <div style={{backgroundColor: "#FFF" , height :"100%"}}>
         <section className="text-center rowPainelPrincipal ml-auto mr-auto">
-            <Navbar authenticated={user.authenticated} user={user}/>
+            <NavBarEcommerce authenticated={user.authenticated} user={user}/>
             <Carousel />
-            <CarouselNavCenter categories={allCategories ? allCategories : ""}/>
             <ProdutosEmAlta products={allHighProducts ? allHighProducts : ""}/>
             <Promocoes/>
             <Footer />

@@ -121,7 +121,7 @@ if(user[0].authenticated){
                                                     width={100}
                                                     height={100}
                                                     alt="170x180"
-                                                    src="https:image.flaticon.com/icons/png/512/147/147144.png"
+                                                    src={user[0].avatar}
                                                 />
                                                 <Figure.Caption>
                                                     {
@@ -133,9 +133,9 @@ if(user[0].authenticated){
                                                           ||
                                                          (user[0].perfil === 2 ? "Vendedor - Nível `$user[0].exp`" : "" )
                                                           ||
-                                                         (user[0].perfil === 3 ? "Cliente - Nível `$user[0].exp`" : "" )
+                                                         (user[0].perfil === 4 ? "Cliente - Nível `$user[0].exp`" : "" )
                                                           ||
-                                                         (user[0].perfil === 4 ? "Moderador - Nível `$user[0].exp`" : "" )
+                                                         (user[0].perfil === 3 ? "Moderador - Nível `$user[0].exp`" : "" )
                                                          }
                                                     </strong>
                                                 </Figure.Caption>
@@ -176,16 +176,17 @@ if(user[0].authenticated){
                                             <MenuItem className="TESTEDECLASSE"><Link to="/admin/cadastrarVendedores">Cadastrar Vendedores</Link></MenuItem>
                                             <MenuItem className="TESTEDECLASSE"><Link to="/admin/listarVendedores">Listar Vendedores</Link></MenuItem>
                                         </SubMenu>
+                                        <SidebarFooter>
+                                            <Menu iconShape="circle">
+                                                <SubMenu icon={<FiArrowLeft/>}  title="Saída">
+                                                    <MenuItem onClick={redirectToEcommerce}>Voltar Para Sua Loja</MenuItem>
+                                                    <MenuItem onClick={loggout}>Deslogar</MenuItem>
+                                                </SubMenu>
+                                            </Menu>
+                                        </SidebarFooter>
                                     </Menu>
                                 </SidebarContent>
-                                <SidebarFooter>
-                                <Menu iconShape="circle">
-                                    <SubMenu icon={<FiArrowLeft/>}  title="Saída">
-                                        <MenuItem onClick={redirectToEcommerce}>Voltar Para Sua Loja</MenuItem>
-                                        <MenuItem onClick={loggout}>Deslogar</MenuItem>
-                                    </SubMenu>
-                                </Menu>
-                                </SidebarFooter>
+                                
                             </ProSidebar>
                                 </div>
                                 <div style={{marginLeft: "auto" , marginRight: "auto" , width : '100%' , height : "auto" , backgroundColor: "white" , padding : "5px"}}>
